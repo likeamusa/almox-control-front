@@ -10,8 +10,12 @@ const INITIAL_STATE = {
         pagina: '1',
         saidaModal: false,
         modalAutorizar: false,
+        movLoading: false,
+        pendLoading: false,
+        headerVisible: true,
     },
     movimentacaoASerAutorizada: {},
+    movimentacaoToPrint: {},
     material: {},
     materials: [],
     cadastro: {
@@ -40,12 +44,6 @@ const app = (state = INITIAL_STATE, action) => {
             });
 
         case types.LIST_ALL:
-            return produce(state, draft => {
-                draft = { ...draft, movimentacoes: action.payload };
-                return draft;
-            });
-        
-        case types.SAVE_MOVIMENTACAO:
             return produce(state, draft => {
                 draft = { ...draft, movimentacoes: action.payload };
                 return draft;

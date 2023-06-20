@@ -14,7 +14,7 @@ const Header = () => {
         }}
         >
             {/* logo */}
-            <a href="">
+            <a href="/">
 
             <h4
             style={{

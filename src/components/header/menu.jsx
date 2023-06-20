@@ -1,13 +1,16 @@
 import { Nav } from 'rsuite'
 import { useDispatch, useSelector } from 'react-redux';
 import { updateApp } from '../../store/modules/app/actions';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 const { Item } = Nav
 
+const withRouter = (Component) => (props) => {
+    const location = useLocation();
+    return <Component {...props} location={location} />;
+};
 
-
-const Menu = () => {
+const Menu = ({ location }) => {
 
     const navigate = useNavigate();
 
@@ -25,13 +28,12 @@ const Menu = () => {
     return (
         <Nav
         style={{ width: 400, display: 'flex', justifyContent: 'space-between'}}
-        appearance='default'
-        activeKey={components.pagina}
+        
+        activeKey={location.pathname.replace('/', '')}
         >
             <Item 
             eventKey='pendentes'
             onClick={() => {
-                setComponent('pagina', 'pendentes')
                 navigate('/pendentes')
             }}
             >
@@ -41,7 +43,6 @@ const Menu = () => {
             <Item 
             eventKey='movimentacoes'
             onClick={() => {
-                setComponent('pagina', 'movimentacoes')
                 navigate('/movimentacoes')
             }}
             >
@@ -52,7 +53,6 @@ const Menu = () => {
             <Item 
             eventKey='cadastro'
             onClick={() => {
-                setComponent('pagina', 'cadastro')
                 navigate('/cadastro')
             }}
             >
@@ -62,4 +62,4 @@ const Menu = () => {
     )
 };
 
-export default Menu;
+export default withRouter(Menu);

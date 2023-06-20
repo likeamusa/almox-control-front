@@ -1,4 +1,4 @@
-import Barra from "./bar";
+import Container from "../../components/container";
 import { Nav } from "rsuite";
 import { useDispatch, useSelector } from "react-redux";
 import { updateApp, fetchCadastro } from "../../store/modules/app/actions";
@@ -35,7 +35,7 @@ const Cadastro = () => {
     const { components } = cadastro
 
     return (
-        <>
+        <Container>
         
             <Nav
             activeKey={components.activeTab}
@@ -116,7 +116,7 @@ const Cadastro = () => {
                 {components.activeTab === 'lote' && <Lote />}
                 {components.activeTab === 'laudo' && <Laudo />}
 
-        </>
+        </Container>
     )
 }
 

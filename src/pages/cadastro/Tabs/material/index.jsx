@@ -37,8 +37,8 @@ const Material = () => {
 
             <ModalComponent 
             onClickProp={e => {
-                setComponent("cadastroModal", false)
                 handleSave()
+                setComponent("cadastroModal", false)
             }} 
             onInputChange={handleInputChange}
             cadastroName={'material'} 

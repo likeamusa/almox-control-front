@@ -88,3 +88,10 @@ export const autorizarMovimentacao = (data) => {
         payload: data
     };
 }
+
+export const getMovimentacao = (data) => {
+    return {
+        type: types.GET_MOVIMENTACAO,
+        payload: data
+    };
+}

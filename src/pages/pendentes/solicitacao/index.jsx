@@ -4,12 +4,15 @@ import { useSelector, useDispatch } from 'react-redux';
 import { updateApp, saveMovimentacao, fetchCadastro } from '../../../store/modules/app/actions';
 import TableComponent from "./table";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Saida = () => {
 
     useEffect(() => {
         dispatch(fetchCadastro())
     }, [])
+
+    const navigate = useNavigate()
 
     const { components, materials, cadastro } = useSelector(state => state.app)
 
@@ -56,8 +59,7 @@ const Saida = () => {
                 alert('Preencha o tipo de movimentação')
             }
         })
-        console.log(mateiralsToSave)
-        setComponent('pagina', "movimentacoes")
+        navigate('/pendentes')
     }
 
     return (
@@ -68,7 +70,7 @@ const Saida = () => {
                 {/* VOLTAR */}
                 <a
                 style={{cursor: 'pointer'}}
-                onClick={() => setComponent('pagina', "pendentes")}
+                onClick={() => navigate('/pendentes')}
                 >Voltar</a>
 
                 {/* ADICIONAR */}

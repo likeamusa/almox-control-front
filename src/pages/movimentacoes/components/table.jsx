@@ -23,6 +23,7 @@ const TableComponent = ({ data }) => {
         <Table
             data={data}
             height={height}
+            loading={components.movLoading}
             >
                 {/* id_mov */}
                 <Column width={110} align="center" fixed>

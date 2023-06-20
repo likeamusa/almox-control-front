@@ -4,6 +4,7 @@ import { listAll } from '../../store/modules/app/actions'
 import { updateApp } from '../../store/modules/app/actions'
 import { useNavigate } from 'react-router-dom'
 
+import Container from "../../components/container";
 import TableComponent from './components/table'
 import Barra from './components/bar'
 
@@ -28,7 +29,7 @@ const Movimentacoes = () => {
     const movimentacoesFiltradas = movimentacoes?.filter(movimentacao => movimentacao.status === "Autorizada")    
 
     return (
-       <div
+       <Container
          style={{
                 display: 'flex',
                 flexDirection: 'column',
@@ -49,7 +50,7 @@ const Movimentacoes = () => {
 
             <TableComponent data={movimentacoesFiltradas} />
             
-       </div>
+       </Container>
     )
 }
 

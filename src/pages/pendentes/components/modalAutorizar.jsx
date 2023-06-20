@@ -28,11 +28,11 @@ const ModalComponent = ({data}) => {
     const movimentacaoAutorizada = {
         ...movimentacaoASerAutorizada,
         id_resp_aut: mov.id_resp_aut,
-        status: 'AUTORIZADA'
     }
 
     const handleConfirm = () => {
         dispatch(autorizarMovimentacao(movimentacaoAutorizada))
+        console.log(movimentacaoAutorizada)
         setComponent('modalAutorizacao', false)
     }
 
@@ -80,7 +80,7 @@ const ModalComponent = ({data}) => {
                         className="form-group"
                         >
                             <input
-                            type="text"
+                            type="number"
                             name="id_resp_aut"
                             className="form-control"
                             onChange={handleInputChange}

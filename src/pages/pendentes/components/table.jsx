@@ -1,11 +1,14 @@
 import { Table } from 'rsuite';
 import { useSelector, useDispatch } from 'react-redux';
 import { updateApp } from '../../../../src/store/modules/app/actions';
+import { useNavigate } from 'react-router-dom';
 
 
 const { Column, HeaderCell, Cell } = Table;
 
 const TableComponent = ({ data }) => {
+
+    const navigate = useNavigate()
 
     const dispatch = useDispatch()
 
@@ -51,6 +54,7 @@ const TableComponent = ({ data }) => {
         <Table
             data={excludeRepeated}
             height={height}
+            loading={components.movLoading}
             >
                 {/* id_mov */}
                 <Column width={110} align="center" fixed>
@@ -60,7 +64,6 @@ const TableComponent = ({ data }) => {
                             return (
                                 <a 
                                 href={`/movimentacoes/${rowData.id_mov}`}
-                                onClick={() => setComponent('pagina', 'impressao')}
                                 // open in new tab
                                 target="_blank"
                                 style={{cursor: 'pointer'}}

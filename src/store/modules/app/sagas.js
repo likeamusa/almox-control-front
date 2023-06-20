@@ -1,4 +1,4 @@
-import { all, takeLatest, put, select, call } from 'redux-saga/effects';
+import { all, takeLatest, put, select, call, take } from 'redux-saga/effects';
 import types from './types';
 import { listAll, updateApp } from './actions';
 
@@ -6,12 +6,23 @@ import api from '../../../services/api';
 
 export function* fetchApp() { // função que faz a requisição para a api
 
+    const { components } = yield select(state => state.app); // pega o estado atual da aplicação
+
     try {
+
+        yield put(updateApp({components: {...components, movLoading: true }})); // loading true
 
         const {data: res} = yield api.get('/movimentacoes'); // faz a requisição para a api
 
-        yield put(updateApp({movimentacoes: res})); // dispara a action UPDATE_APP com o resultado da requisição
+        if(res.error) {
+            alert(res.message);
+            yield put(updateApp({components: {...components, movLoading: false }})); // loading false
+            return;
+        }
 
+        yield put(updateApp({ movimentacoes: res.data})); // dispara a action UPDATE_APP com o resultado da requisição
+
+        yield put(updateApp({components: {...components, movLoading: false }})); // loading false
 
     } // retorna o resultado da requisição
 
@@ -23,25 +34,47 @@ export function* fetchApp() { // função que faz a requisição para a api
 
 export function* saveMovimentacao({ payload }) { // função que faz a requisição para a api
 
-    const { movimentacoes } = yield select(state => state.app); // pega o estado atual da aplicação
-
     try {
 
         const { data: res } = yield api.post('/movimentacoes', payload); // faz a requisição para a api
 
-        yield put(updateApp({ material: {}, materials: {} })); // dispara a action UPDATE_APP com o resultado da requisição
+        if(res.error) {
+            alert(res.message);
+            return;
+        } // se houver erro, retorna o erro
 
-        yield put(listAll()); // dispara a action LIST_ALL para atualizar a lista de movimentações
-        
         alert('Movimentação salva com sucesso!'); // alerta de sucesso
         
     } // salva a movimentação
 
     catch (error) {
-        alert(error.response);
+        alert(JSON.stringify(error.message));
+        console.log(error);
     } // retorna o erro
 
 }
+
+export function* getOneMovimentacao({ payload }) { // função que faz a requisição para a api
+
+    try {
+            
+            const { data: res } = yield api.get(`/movimentacoes/${payload}`); // faz a requisição para a api
+    
+            if(res.error) {
+                alert(res.message);
+                return;
+            } // se houver erro, retorna o erro
+    
+            yield put(updateApp({ movimentacaoToPrint: res.data})); // dispara a action UPDATE_APP com o resultado da requisição
+    
+        } // retorna o resultado da requisição
+
+        catch (error) {
+            alert(JSON.stringify(error.message));
+            console.log(error);
+        } // retorna o erro
+
+} // retorna uma movimentação
 
 export function* fetchCadastro() { // função que faz a requisição de todos os cadstros para a api
 
@@ -78,7 +111,8 @@ export function* saveMaterial({ payload }) { // função que faz a requisição 
 
     catch (error) {
             
-            alert(error.response); // retorna erro
+            alert(JSON.stringify(error)); // retorna erro
+            console.log(error);
     
     } // retorna erro
 }
@@ -98,7 +132,7 @@ export function* saveColaborador({ payload }) { // função que faz a requisiç�
 
     catch (error) {
                 
-                alert(error.response); // retorna erro
+                alert(JSON.stringify(error)); // retorna erro
         
         } // retorna erro
 }
@@ -108,7 +142,7 @@ export function* saveFornecedor({ payload }) { // função que faz a requisiçã
 
     try{
 
-        const { data: res } = yield api.post('/fornecedors', payload); // faz a requisição para a api
+        const { data: res } = yield api.post('/fornecedores', payload); // faz a requisição para a api
 
         alert('Fornecedor salvo com sucesso!'); // alerta de sucesso
 
@@ -118,7 +152,7 @@ export function* saveFornecedor({ payload }) { // função que faz a requisiçã
 
     catch (error) {
 
-        alert(error.response); // retorna erro
+        alert(JSON.stringify(error)) // retorna erro
 
     } // retorna erro
 }
@@ -138,7 +172,7 @@ export function* saveCentro({ payload }) { // função que faz a requisição pa
 
     catch (error) {
 
-        alert(error.response); // retorna erro
+        alert(JSON.stringify(error)) // retorna erro
 
     } // retorna erro
 }
@@ -158,7 +192,7 @@ export function* saveNota({ payload }) { // função que faz a requisição para
 
     catch (error) {
 
-        alert(error.response); // retorna erro
+        alert(JSON.stringify(error)) // retorna erro
 
     } // retorna erro
 }
@@ -178,7 +212,7 @@ export function* saveCa({ payload }) { // função que faz a requisição para a
 
     catch (error) {
 
-        alert(error.response); // retorna erro
+        alert(JSON.stringify(error)) // retorna erro
 
     } // retorna erro
 
@@ -199,7 +233,7 @@ export function* saveLote({ payload }) { // função que faz a requisição para
 
     catch (error) {
 
-        alert(error.response); // retorna erro
+        alert(JSON.stringify(error)) // retorna erro
 
     } // retorna erro
 }
@@ -219,7 +253,7 @@ export function* saveLaudo({ payload }) { // função que faz a requisição par
 
     catch (error) {
 
-        alert(error.response); // retorna erro
+        alert(JSON.stringify(error)) // retorna erro
 
     } // retorna erro
 
@@ -241,7 +275,7 @@ export function* autorizarMovimentacao({ payload }) { // função que faz a requ
 
     catch (error) {
 
-        alert(error.response); // retorna erro
+        alert(JSON.stringify(error)) // retorna erro
 
     } // retorna erro
 
@@ -260,6 +294,7 @@ export default all([
     takeLatest(types.SAVE_CA, saveCa),
     takeLatest(types.SAVE_LOTE, saveLote),
     takeLatest(types.SAVE_LAUDO, saveLaudo),
-    takeLatest(types.AUTORIZAR_MOVIMENTACAO, autorizarMovimentacao)
+    takeLatest(types.AUTORIZAR_MOVIMENTACAO, autorizarMovimentacao),
+    takeLatest(types.GET_MOVIMENTACAO, getOneMovimentacao),
 
 ]); // dispara a função fetchApp quando a action LIST_ALL for disparada
