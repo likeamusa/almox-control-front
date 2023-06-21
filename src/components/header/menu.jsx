@@ -23,40 +23,49 @@ const Menu = ({ location }) => {
             components: {...components, [component]: value}}
         ))
     }
+
+    const tabSizeStyle = {
+        width: 200,
+        display: 'flex',
+        justifyContent: 'center',
+    };
     
 
     return (
         <Nav
-        style={{ width: 400, display: 'flex', justifyContent: 'space-between'}}
-        
+        style={{ width: 500, display: 'flex', justifyContent: 'space-between', alignSelf: 'end', color: 'white'}}
+        appearance='tabs'
         activeKey={location.pathname.replace('/', '')}
         >
             <Item 
+            style={tabSizeStyle}
             eventKey='pendentes'
             onClick={() => {
                 navigate('/pendentes')
             }}
             >
-                Pendente
+                <a>Pendentes</a>
             </Item>
             
             <Item 
+            style={tabSizeStyle}
             eventKey='movimentacoes'
             onClick={() => {
                 navigate('/movimentacoes')
             }}
             >
-                Movimentações
+                <a>Movimentaçoes</a>
             </Item>
 
 
             <Item 
+            style={tabSizeStyle}
             eventKey='cadastro'
             onClick={() => {
                 navigate('/cadastro')
             }}
             >
-                Cadastro
+                <a>Cadastro</a>
             </Item>
         </Nav>
     )

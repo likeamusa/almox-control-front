@@ -11,7 +11,6 @@ const Barra = ({children}) => {
                 justifyContent: 'space-between',
                 alignItems: 'center',
                 padding: '0 20px',
-                marginBottom: '20px'
             }}
             >
                 {children}

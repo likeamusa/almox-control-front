@@ -1,4 +1,5 @@
 import Barra from "../components/bar";
+import Container from '../../../components/container'
 import ModalComponent from "./modalAutorizar";
 import { useSelector, useDispatch } from 'react-redux';
 import { updateApp, saveMovimentacao, fetchCadastro } from '../../../store/modules/app/actions';
@@ -64,6 +65,8 @@ const Saida = () => {
 
     return (
         <>
+            <Container>
+
             <ModalComponent />
             <Barra>
 
@@ -77,7 +80,7 @@ const Saida = () => {
                 <a
                 style={{cursor: 'pointer'}}
                 onClick={() => setComponent('saidaModal', true)}
-                >Adicionar</a>
+                >Adicionar item</a>
 
                 {/* SALVAR */}
                 <a
@@ -177,6 +180,7 @@ const Saida = () => {
 
             <TableComponent data={materials}/>
 
+            </Container>
 
         </>
     );

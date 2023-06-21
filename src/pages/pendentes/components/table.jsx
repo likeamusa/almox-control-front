@@ -48,11 +48,18 @@ const TableComponent = ({ data }) => {
         ))
     })
 
+    const matSolConcat = excludeRepeated?.map(item => {
+        return {
+            ...item,
+            solicitante: `${item.id_resp_sol} - ${item.solicitante}`
+        }
+    })
+
     const height = window.innerHeight - 250;
 
     return (
         <Table
-            data={excludeRepeated}
+            data={matSolConcat}
             height={height}
             loading={components.movLoading}
             >
@@ -75,34 +82,29 @@ const TableComponent = ({ data }) => {
                     </Cell>
                 </Column>
                 
-                {/* mov */}
-                <Column width={100} align="center">
-                    <HeaderCell>Mov.</HeaderCell>
-                    <Cell dataKey="mov" />
-                </Column>
-
                 {/* tipo */}
-                <Column width={100} align="center">
+                <Column flexGrow={1} align="center">
                     <HeaderCell>Tipo</HeaderCell>
                     <Cell dataKey="tipo_mov" />
                 </Column>
 
+                {/* mov */}
+                <Column width={120} align="center">
+                    <HeaderCell>Mov.</HeaderCell>
+                    <Cell dataKey="mov" />
+                </Column>
+
+
                 {/* origem */}
-                <Column width={100} align="center">
+                <Column flexGrow={1} align="center">
                     <HeaderCell>Origem</HeaderCell>
                     <Cell dataKey="id_centro_origem" />
                 </Column>
 
                 {/* destino */}
-                <Column width={100} align="center">
+                <Column flexGrow={1} align="center">
                     <HeaderCell>Destino</HeaderCell>
                     <Cell dataKey="id_centro_destino" />
-                </Column>
-
-                {/* status */}
-                <Column width={100} align="center">
-                    <HeaderCell>Status</HeaderCell>
-                    <Cell dataKey="status" />
                 </Column>
 
                 {/* solicitante */}
@@ -113,15 +115,9 @@ const TableComponent = ({ data }) => {
 
 
                 {/* data */}
-                <Column flexGrow={1} align="center">
+                <Column width={220} align="center">
                     <HeaderCell>Data/Hora</HeaderCell>
                     <Cell dataKey="data" />
-                </Column>
-
-                {/* usuario */}
-                <Column width={100} align="center">
-                    <HeaderCell>Usuário</HeaderCell>
-                    <Cell dataKey="id_usuario" />
                 </Column>
 
                 

@@ -13,6 +13,11 @@ import CA from "./Tabs/ca";
 import Lote from "./Tabs/lote";
 import Laudo from "./Tabs/laudo";
 
+const tabSizeStyle = {
+    width: 160,
+    display: 'flex',
+    justifyContent: 'center',
+};
 
 const { Item } = Nav
 
@@ -44,6 +49,7 @@ const Cadastro = () => {
             >
                 {/* material */}
                 <Item
+                style={tabSizeStyle}
                 eventKey='material'
                 onClick={() => handleActiveTab('material')}
                 >
@@ -52,6 +58,7 @@ const Cadastro = () => {
 
                 {/* colaborador */}
                 <Item
+                style={tabSizeStyle}
                 eventKey='colaborador'
                 onClick={() => handleActiveTab('colaborador')}
                 >
@@ -60,6 +67,7 @@ const Cadastro = () => {
 
                 {/* fornecedor */}
                 <Item
+                style={tabSizeStyle}
                 eventKey='fornecedor'
                 onClick={() => handleActiveTab('fornecedor')}
                 >
@@ -68,6 +76,7 @@ const Cadastro = () => {
 
                 {/* centro */}
                 <Item
+                style={tabSizeStyle}
                 eventKey='centro'
                 onClick={() => handleActiveTab('centro')}
                 >
@@ -76,6 +85,7 @@ const Cadastro = () => {
 
                 {/* nf */}
                 <Item
+                style={tabSizeStyle}
                 eventKey='nf'
                 onClick={() => handleActiveTab('nf')}
                 >
@@ -84,6 +94,7 @@ const Cadastro = () => {
 
                 {/* C.A. */}
                 <Item
+                style={tabSizeStyle}
                 eventKey='ca'
                 onClick={() => handleActiveTab('ca')}
                 >
@@ -92,6 +103,7 @@ const Cadastro = () => {
 
                 {/* Lote */}
                 <Item
+                style={tabSizeStyle}
                 eventKey='lote'
                 onClick={() => handleActiveTab('lote')}
                 >
@@ -100,6 +112,7 @@ const Cadastro = () => {
 
                 {/* Laudo */}
                 <Item
+                style={tabSizeStyle}
                 eventKey='laudo'
                 onClick={() => handleActiveTab('laudo')}
                 >
