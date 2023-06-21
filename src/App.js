@@ -20,7 +20,7 @@ const App = () => {
             <Header />
           }
                 <Switch>
-                  <Route path="/movimentacoes/:id_mov" element={<Impressao />} />
+                    <Route exact path="/movimentacoes/:id_mov" element={<Impressao />} />
                     <Route path="/movimentacoes" element={<Movimentacoes />} />
                     <Route path="/solicitacao" element={<Solicitacao />} />
                     <Route path="/pendentes" element={<Pendentes />} />
