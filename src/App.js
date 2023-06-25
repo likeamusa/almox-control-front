@@ -57,7 +57,9 @@ const App = () => {
   const { components } = useSelector(state => state.app);
 
   return (
-    <Router>
+    <Router
+    basename={process.env.PUBLIC_URL}
+    >
       {
         components.headerVisible &&
         <Header />
