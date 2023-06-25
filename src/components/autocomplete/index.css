@@ -1,0 +1,35 @@
+
+.data-result {
+    background-color: #f1f1f1f1;
+
+    border-radius: 1px;
+
+    max-height: 140px;
+
+    overflow: hidden;
+
+    overflow-y: auto;
+
+    cursor: pointer;
+
+    
+}
+
+.data-result::-webkit-scrollbar {
+    display: none;
+}
+
+.data-item {
+
+    display: flex;
+
+    align-items: center;
+
+    padding: 10px 17px;
+
+
+}
+
+.data-item:hover {
+    background-color: #e1e1e1e1;
+}

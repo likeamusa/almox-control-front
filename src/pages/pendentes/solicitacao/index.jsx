@@ -1,21 +1,25 @@
 import Barra from "../components/bar";
 import Container from '../../../components/container'
-import ModalComponent from "./modalAutorizar";
+import ModalComponent from "./modalAdicionar";
 import { useSelector, useDispatch } from 'react-redux';
 import { updateApp, saveMovimentacao, fetchCadastro } from '../../../store/modules/app/actions';
 import TableComponent from "./table";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import Autocomplete from "../../../components/autocomplete";
 
 const Saida = () => {
 
+    const { components, materials, cadastro, online } = useSelector(state => state.app)
+
     useEffect(() => {
-        dispatch(fetchCadastro())
+        if(online) {
+            dispatch(fetchCadastro())
+        }
     }, [])
 
     const navigate = useNavigate()
 
-    const { components, materials, cadastro } = useSelector(state => state.app)
 
     const { cadastros } = cadastro
 
@@ -27,7 +31,7 @@ const Saida = () => {
         ))
     }
 
-    const [movData, setMovData] = useState({})
+    const [ movData, setMovData ] = useState({})
 
     const id_mov = Math.floor(Math.random() * 99999999)
 
@@ -45,6 +49,13 @@ const Saida = () => {
         }
     })
 
+    const dataSolicitante = cadastros.colaborador?.map(s => {
+        return {
+            id: s.matricula,
+            nome: `${s.matricula} - ${s.nome}`
+        }
+    })
+
     const handleInputChange = (e) => {
         const { name, value } = e.target
         setMovData({...movData, [name]: value})
@@ -53,14 +64,11 @@ const Saida = () => {
 
     const handleSave = () => {
         mateiralsToSave.forEach(material => {
-            if(material.tipo_mov !== ''){
-                dispatch(saveMovimentacao(material))
-            }
-            else{
-                alert('Preencha o tipo de movimentação')
-            }
+            const id_resp_sol = document.querySelector('[name="id_resp_sol"]').value?.replace(/[^0-9]/g, '')
+            dispatch(saveMovimentacao({...material, id_resp_sol}))
+            navigate('/pendentes')
         })
-        navigate('/pendentes')
+        // navigate('/pendentes')
     }
 
     return (
@@ -104,13 +112,11 @@ const Saida = () => {
                 className="form-group"
                 >
                     <b>Solicitante</b>
-                    <input
-                    autoComplete="off"
-                    type="text"
-                    name="id_resp_sol"	
-                    value={movData.id_resp_sol}
-                    className="form-control"
+                    <Autocomplete 
+                    data={dataSolicitante}
+                    name="id_resp_sol"
                     onChange={handleInputChange}
+                    value={movData.id_resp_sol}
                     />
                 </div>
 

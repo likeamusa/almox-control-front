@@ -32,6 +32,38 @@ export function* fetchApp() { // função que faz a requisição para a api
 
 }
 
+export function* apiRequest( {payload }) {
+
+    try {
+
+        const param = payload.param !== `undefined` ? `/${payload.param}` : ``;
+        
+        switch(payload.method) {
+            case 'GET':
+                const { data: res} = yield api.get(`${payload.endpoint}${param}`);
+                return yield put(updateApp({[`${payload.endpoint}`.replace('/', '')]: res}));
+            case 'POST':
+                const { data: res2 } = yield api.post(payload.endpoint);
+                return yield put(updateApp({ [payload.endpoint]: res2.data}));
+            case 'PUT':
+                const { data: res3 } = yield api.put(payload.endpoint);
+                return yield put(updateApp({ [payload.endpoint]: res3.data}));
+            case 'DELETE':
+                const { data: res4 } = yield api.delete(payload.endpoint);
+                return yield put(updateApp({ [payload.endpoint]: res4.data}));
+            default:
+                return console.log(`Método ${payload.method} não encontrado!`);
+
+        }
+    }
+
+    catch (error) {
+
+        alert(JSON.stringify(error.message));
+    }
+
+}
+
 export function* saveMovimentacao({ payload }) { // função que faz a requisição para a api
 
     try {
@@ -44,6 +76,8 @@ export function* saveMovimentacao({ payload }) { // função que faz a requisiç
         } // se houver erro, retorna o erro
 
         alert('Movimentação salva com sucesso!'); // alerta de sucesso
+        
+        yield call(fetchApp); // chama a função fetchApp para atualizar as movimentações
         
     } // salva a movimentação
 
@@ -296,5 +330,6 @@ export default all([
     takeLatest(types.SAVE_LAUDO, saveLaudo),
     takeLatest(types.AUTORIZAR_MOVIMENTACAO, autorizarMovimentacao),
     takeLatest(types.GET_MOVIMENTACAO, getOneMovimentacao),
+    takeLatest(types.API_REQUEST, apiRequest)
 
 ]); // dispara a função fetchApp quando a action LIST_ALL for disparada

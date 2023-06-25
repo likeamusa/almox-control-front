@@ -1,13 +1,21 @@
 import { Modal } from 'rsuite';
 import { useSelector, useDispatch } from 'react-redux';
-import { updateApp, autorizarMovimentacao } from '../../../store/modules/app/actions';
-import { useState } from 'react';
+import { updateApp, autorizarMovimentacao, fetchCadastro } from '../../../store/modules/app/actions';
+import { useState, useEffect } from 'react';
+import Autocomplete from '../../../components/autocomplete';
 
 const { Header, Title, Body, Footer } = Modal;
 
 const ModalComponent = ({data}) => {
 
-    const { components, movimentacaoASerAutorizada } = useSelector(state => state.app)
+    const { components, movimentacaoASerAutorizada, cadastro, online } = useSelector(state => state.app)
+
+    useEffect(() => {
+        if(online) {
+            dispatch(fetchCadastro())
+        }
+    }, [])
+
     
     const dispatch = useDispatch()
 
@@ -31,10 +39,18 @@ const ModalComponent = ({data}) => {
     }
 
     const handleConfirm = () => {
-        dispatch(autorizarMovimentacao(movimentacaoAutorizada))
-        console.log(movimentacaoAutorizada)
+        const id_resp_aut = document.querySelector('input[name="id_resp_aut"]').value?.split(' - ')[0]
+        dispatch(autorizarMovimentacao({...movimentacaoAutorizada, id_resp_aut: parseInt(id_resp_aut)}))
+        console.log({...movimentacaoAutorizada, id_resp_aut: parseInt(id_resp_aut)})
         setComponent('modalAutorizacao', false)
     }
+
+    const colaboradoresData = cadastro.cadastros?.colaborador?.map((item) => {
+        return {
+            id: item.matricula,
+            nome: `${item.matricula} - ${item.nome}`
+        }
+    })
 
 
     return (
@@ -76,17 +92,13 @@ const ModalComponent = ({data}) => {
                     >
                         {/* material */}
                         <b>Autorizador</b>
-                        <div
-                        className="form-group"
-                        >
-                            <input
-                            type="number"
-                            name="id_resp_aut"
-                            className="form-control"
-                            onChange={handleInputChange}
-                            placeholder='matricula'
-                            />
-                        </div>
+                        <Autocomplete
+                        data={colaboradoresData}
+                        name="id_resp_aut"
+                        placeholder="Digite a matrícula ou nome do autorizador"
+                        onChange={handleInputChange}
+                    
+                        />
                         
                     </div>
                 </div>

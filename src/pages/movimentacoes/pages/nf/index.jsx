@@ -1,23 +1,17 @@
-import Barra from "../../components/bar";
+
 
 const Nf = () => {
 
+    // pagina de impressao de nota fiscal com bootstrap
     return (
         <>
-            <Barra
-            className='w-100 display-flex justify-content-space-between'
-            >
-                <a href="">Voltar</a>
-                <a href="">Salvar</a>
-            </Barra>
-            <div
-            style={{
-                height: '600px',
-            }}
-            >
-                
-            </div>
+           <table
+           className="table table-bordered table-striped table-hover table-sm"
+           >
+            
+           </table>
         </>
+
     )
 };
 

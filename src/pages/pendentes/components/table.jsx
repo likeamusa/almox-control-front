@@ -72,7 +72,6 @@ const TableComponent = ({ data }) => {
                                 <a 
                                 href={`/movimentacoes/${rowData.id_mov}`}
                                 // open in new tab
-                                target="_blank"
                                 style={{cursor: 'pointer'}}
                                 >
                                     {rowData.id_mov}

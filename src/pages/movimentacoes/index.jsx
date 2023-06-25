@@ -14,11 +14,15 @@ const Movimentacoes = () => {
 
     const navigator = useNavigate()
 
+    const { components, movimentacoes, online } = useSelector(state => state.app)
+
     useEffect(() => {
-        dispatch(listAll())
+        setComponent('headerVisible', true)
+        if(online) {
+            dispatch(listAll())
+        }
     }, [])
 
-    const { components, movimentacoes } = useSelector(state => state.app)
     
     const setComponent = (component, value) => {
         dispatch(updateApp({

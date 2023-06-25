@@ -95,3 +95,10 @@ export const getMovimentacao = (data) => {
         payload: data
     };
 }
+
+export const apiRequest = ({ method, endpoint, param } ) => {
+    return {
+        type: types.API_REQUEST,
+        payload: { method, endpoint, param }
+    };
+}

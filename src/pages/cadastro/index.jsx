@@ -25,9 +25,19 @@ const Cadastro = () => {
 
     const dispatch = useDispatch();
 
+    const mainComponents = useSelector(state => state.app.components)
+
+    const { cadastro, online } = useSelector(state => state.app)
+
     useEffect(() => {
-        dispatch(fetchCadastro())
+        dispatch(updateApp({components: {...mainComponents, headerVisible: 'material'}}))
+        if(online){
+            dispatch(fetchCadastro())
+        }
     }, [])
+
+
+    const { components } = cadastro
 
     const handleActiveTab = (tab) => {
         dispatch(updateApp({
@@ -35,9 +45,6 @@ const Cadastro = () => {
         }))
     }
 
-    const { cadastro } = useSelector(state => state.app)
-
-    const { components } = cadastro
 
     return (
         <Container>

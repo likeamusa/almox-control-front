@@ -1,0 +1,9 @@
+#tabela {
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: 1rem;
+    color: #212529;
+    background-color: transparent;
+    border-color: #dee2e6;
+}
+

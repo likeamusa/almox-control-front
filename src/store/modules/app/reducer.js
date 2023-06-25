@@ -1,6 +1,7 @@
 import produce from 'immer';
 import types from './types';
 
+
 const INITIAL_STATE = {
     usuario: {
         name: 'Usuário',
@@ -30,7 +31,8 @@ const INITIAL_STATE = {
             ],
         },
     },
-    movimentacoes: []
+    movimentacoes: [],
+    online: false,
 }
 
 const app = (state = INITIAL_STATE, action) => {
