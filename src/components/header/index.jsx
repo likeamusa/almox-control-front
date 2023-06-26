@@ -1,10 +1,7 @@
 import Menu from './menu';
-import { useSelector } from 'react-redux';
 
 
 const Header = () => {
-
-    const { online } = useSelector(state => state.app)
 
     return (
         <div
@@ -42,7 +39,6 @@ const Header = () => {
                 gap: '10px',
             }}
             >   
-                <span>{online ? 'Online' : 'Offline'}</span>
                 <span>Usuário</span>
                 <a href="">Sair</a>
 

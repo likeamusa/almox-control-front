@@ -13,7 +13,7 @@ const Pendentes = () => {
 
     const navigate = useNavigate()
 
-    const { components, online } = useSelector(state => state.app)
+    const { components } = useSelector(state => state.app)
 
     const setComponent = (component, value) => {
         dispatch(updateApp({
@@ -29,9 +29,7 @@ const Pendentes = () => {
     
     useEffect(() => {
         setComponent('headerVisible', true)
-        if(online) {
-            dispatch(listAll())
-        }
+        dispatch(listAll())
     }, [])
 
     return (

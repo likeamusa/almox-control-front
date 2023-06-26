@@ -27,13 +27,11 @@ const Cadastro = () => {
 
     const mainComponents = useSelector(state => state.app.components)
 
-    const { cadastro, online } = useSelector(state => state.app)
+    const { cadastro } = useSelector(state => state.app)
 
     useEffect(() => {
         dispatch(updateApp({components: {...mainComponents, headerVisible: 'material'}}))
-        if(online){
-            dispatch(fetchCadastro())
-        }
+        dispatch(fetchCadastro())
     }, [])
 
 
