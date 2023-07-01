@@ -44,7 +44,7 @@ const Saida = () => {
             id_centro_origem: movData.id_centro_origem,
             id_centro_destino: movData.id_centro_destino,
             data: new Date(),
-            id_usuario: 19859,
+            id_usuario: localStorage.getItem('@almox-control/matricula'),
             Status: 'SOLICITADO'
         }
     })
