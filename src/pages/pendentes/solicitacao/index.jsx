@@ -67,8 +67,10 @@ const Saida = () => {
             const id_resp_sol = document.querySelector('[name="id_resp_sol"]').value?.replace(/[^0-9]/g, '')
             dispatch(saveMovimentacao({...material, id_resp_sol}))
             navigate('/pendentes')
+            dispatch(updateApp({
+                'materials': []
+            }))
         })
-        // navigate('/pendentes')
     }
 
     return (

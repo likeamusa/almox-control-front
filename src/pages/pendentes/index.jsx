@@ -3,7 +3,7 @@ import Container from "../../components/container";
 import TableComponent from "./components/table"
 import { useSelector, useDispatch } from "react-redux"
 import { useEffect } from "react"
-import { updateApp, listAll } from "../../store/modules/app/actions"
+import { updateApp, listAll, fetchCadastro } from "../../store/modules/app/actions"
 import ModaAutorizar from "./components/modalAutorizar"
 import { useNavigate } from "react-router-dom"
 
@@ -30,6 +30,7 @@ const Pendentes = () => {
     useEffect(() => {
         setComponent('headerVisible', true)
         dispatch(listAll())
+        dispatch(fetchCadastro())
     }, [])
 
     return (
