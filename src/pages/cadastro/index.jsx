@@ -12,6 +12,7 @@ import NotaFiscal from "./Tabs/nf";
 import CA from "./Tabs/ca";
 import Lote from "./Tabs/lote";
 import Laudo from "./Tabs/laudo";
+import TipoMovimentacao from "./Tabs/movs";
 
 const tabSizeStyle = {
     width: 160,
@@ -124,6 +125,15 @@ const Cadastro = () => {
                     Laudo
                 </Item>
 
+                <Item
+                style={tabSizeStyle}
+                eventKey='tipo_mov'
+                onClick={() => handleActiveTab('tipo_mov')}
+                >
+                    Tipo Movimentação
+                </Item>
+
+
             </Nav>
                 {components.activeTab === 'material' && <Material />}
                 {components.activeTab === 'colaborador' && <Colaborador />}
@@ -133,6 +143,7 @@ const Cadastro = () => {
                 {components.activeTab === 'ca' && <CA />}
                 {components.activeTab === 'lote' && <Lote />}
                 {components.activeTab === 'laudo' && <Laudo />}
+                {components.activeTab === 'tipo_mov' && <TipoMovimentacao />}
 
         </Container>
     )

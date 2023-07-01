@@ -3,10 +3,7 @@ import types from './types';
 
 
 const INITIAL_STATE = {
-    usuario: {
-        name: 'Usuário',
-        func: 'Funcionário',
-    },
+    usuario: {},
     components: {
         pagina: '1',
         saidaModal: false,

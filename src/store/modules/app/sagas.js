@@ -293,6 +293,66 @@ export function* saveLaudo({ payload }) { // função que faz a requisição par
 
 }
 
+// cria um novo tipo de movimentação
+export function* saveTipoMovimentacao({ payload }) { // função que faz a requisição para a api
+
+    try{
+
+        const { data: res } = yield api.post('/tipo_movs', payload); // faz a requisição para a api
+
+        alert('Tipo de movimentação salvo com sucesso!'); // alerta de sucesso
+
+        yield call(fetchCadastro); // chama a função fetchCadastro para atualizar os cadastros
+
+    } // tenta executar
+
+    catch (error) {
+
+        alert(JSON.stringify(error)) // retorna erro
+
+    } // retorna erro
+
+}
+
+// faz login
+export function* login({ payload }) { // função que faz a requisição para a api
+
+    try{
+
+        const { data: res } = yield api.post('/login', payload); // faz a requisição para a api
+
+        const { token } = res; // pega o token da resposta
+
+        const { email, matricula, tipo_usuario } = res; // pega o email da resposta
+
+        if (email) {
+
+            yield put(updateApp({ usuario: { email, matricula, tipo_usuario }}))
+
+        }
+
+        if (token) { // se o token existir
+
+            // registra o token no localStorage
+            localStorage.setItem('@almox-control/token', token);
+            localStorage.setItem('@almox-control/email', email);
+            localStorage.setItem('@almox-control/matricula', matricula);
+            
+            // redireciona para a página inicial
+            window.location.href = '/';
+            
+        }
+ 
+    }
+
+    catch (error) {
+
+        alert(JSON.stringify(error)) // retorna erro
+
+    } // retorna erro
+
+}
+
 // autorizar movimentação
 export function* autorizarMovimentacao({ payload }) { // função que faz a requisição para a api
 
@@ -328,8 +388,10 @@ export default all([
     takeLatest(types.SAVE_CA, saveCa),
     takeLatest(types.SAVE_LOTE, saveLote),
     takeLatest(types.SAVE_LAUDO, saveLaudo),
+    takeLatest(types.SAVE_TIPO_MOVIMENTACAO, saveTipoMovimentacao),
     takeLatest(types.AUTORIZAR_MOVIMENTACAO, autorizarMovimentacao),
     takeLatest(types.GET_MOVIMENTACAO, getOneMovimentacao),
-    takeLatest(types.API_REQUEST, apiRequest)
+    takeLatest(types.API_REQUEST, apiRequest),
+    takeLatest(types.LOGIN, login),
 
 ]); // dispara a função fetchApp quando a action LIST_ALL for disparada

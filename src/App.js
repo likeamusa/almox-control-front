@@ -10,6 +10,7 @@ import Header from "./components/header";
 import Impressao from "./pages/impressao";
 import { useEffect, useState } from "react";
 import { updateApp } from "./store/modules/app/actions";
+import Login from "./pages/login";
 
 
 const App = () => {
@@ -18,22 +19,36 @@ const App = () => {
 
   const { components } = useSelector(state => state.app);
 
+  const signin = () => {
+    return localStorage.getItem('@almox-control/token') ? true : false;
+  }
+
 
   return (
     <Router
-    basename={process.env.PUBLIC_URL}
     >
-      {
-        components.headerVisible &&
-        <Header />
-      }
-      <Switch>
-        <Route exact path="/movimentacoes/:id_mov" element={<Impressao />} />
-        <Route path="/movimentacoes" element={<Movimentacoes />} />
-        <Route path="/solicitacao" element={<Solicitacao />} />
-        <Route path="/pendentes" element={<Pendentes />} />
-        <Route path="/cadastro" element={<Cadastro />} />
-      </Switch>
+      <>
+        {
+          components.headerVisible &&
+          <Header />
+        }
+
+        {signin() ?
+        
+        <Switch>
+          <Route exact path="/movimentacoes/:id_mov" element={<Impressao />} />
+          <Route path="/movimentacoes" element={<Movimentacoes />} />
+          <Route path="/solicitacao" element={<Solicitacao />} />
+          <Route path="/pendentes" element={<Pendentes />} />
+          <Route path="/cadastro" element={<Cadastro />} />
+        </Switch>
+        
+        :
+        
+        <Login />
+
+        }
+      </>
     </Router>
   )
 };

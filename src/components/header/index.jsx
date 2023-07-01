@@ -2,7 +2,7 @@ import Menu from './menu';
 
 
 const Header = () => {
-
+    
     return (
         <div
         style={{
@@ -39,8 +39,16 @@ const Header = () => {
                 gap: '10px',
             }}
             >   
-                <span>Usuário</span>
-                <a href="">Sair</a>
+                <span>{localStorage.getItem('@almox-control/matricula')}</span>
+                <a
+                style={{
+                    cursor: 'pointer',
+                }}
+                onClick={() => {
+                    localStorage.removeItem('@almox-control/token');
+                    window.location.href = '/';
+                }}
+                >Sair</a>
 
             </div>  
 

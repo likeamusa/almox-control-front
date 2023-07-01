@@ -102,3 +102,17 @@ export const apiRequest = ({ method, endpoint, param } ) => {
         payload: { method, endpoint, param }
     };
 }
+
+export const saveTipoMovimentacao = (data) => { 
+    return {
+        type: types.SAVE_TIPO_MOVIMENTACAO,
+        payload: data
+    };
+}
+
+export const login = (data) => {
+    return {
+        type: types.LOGIN,
+        payload: data
+    };
+}
