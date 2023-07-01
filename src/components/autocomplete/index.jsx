@@ -45,6 +45,7 @@ const Autocomplete = ({ data, ...props }) => {
             onChange={handleFilter}
             value={inputSearch}
             placeholder={props.placeholder}
+            autoFocus={props.autoFocus}
             />
             {filterSearch !== 0 && (
 

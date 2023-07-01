@@ -113,6 +113,7 @@ const Saida = () => {
                 >
                     <b>Solicitante</b>
                     <Autocomplete 
+                    autoFocus
                     data={dataSolicitante}
                     name="id_resp_sol"
                     onChange={handleInputChange}

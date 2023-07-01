@@ -1,9 +1,24 @@
-#tabela {
-    border-collapse: collapse;
-    width: 100%;
-    margin-bottom: 1rem;
-    color: #212529;
-    background-color: transparent;
-    border-color: #dee2e6;
+.info-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 25px;
+    border: .5px solid #000;
 }
 
+.item-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 25px;
+    margin-top: 10px;
+    border: .5px solid #000;
+}
+
+.item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 25px;
+    margin-top: 10px;
+}

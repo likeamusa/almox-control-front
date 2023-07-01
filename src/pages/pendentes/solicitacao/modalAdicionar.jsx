@@ -83,6 +83,7 @@ const ModalComponent = () => {
                         className="form-group"
                         >
                             <Autocomplete
+                            autoFocus
                             data={materialData}
                             name="id_material"
                             placeholder="Digite o nome do material"
