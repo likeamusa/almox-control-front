@@ -15,22 +15,12 @@ const Pendentes = () => {
 
     const { components } = useSelector(state => state.app)
 
-    const setComponent = (component, value) => {
-        dispatch(updateApp({
-            components: {...components, [component]: value}}
-        ))
-    }
-
     const { movimentacoes } = useSelector(state => state.app)
 
     const movimentacoesFiltradas = movimentacoes?.filter(movimentacao => movimentacao.status === "Solicitado")
-
-
     
     useEffect(() => {
-        setComponent('headerVisible', true)
-        dispatch(listAll())
-        dispatch(fetchCadastro())
+        dispatch(updateApp({components: {...components, headerVisible: true, printing: false}}))
     }, [])
 
     return (

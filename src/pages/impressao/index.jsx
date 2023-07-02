@@ -15,12 +15,12 @@ const Impressao = () => {
     const { components, movimentacaoToPrint } = useSelector(state => state.app);
     
     useEffect(() => {
-    dispatch(updateApp({components: {...components, headerVisible: false}}));
-    dispatch(getMovimentacao(id_mov));
-    setTimeout(() => {
-        window.print();
-        window.close();
-    }, 1000);
+        dispatch(updateApp({components: {headerVisible: false, printing: true}}));
+        dispatch(getMovimentacao(id_mov));
+        setTimeout(() => {
+            window.print();
+            window.close();
+        }, 2000);
     }, []);
 
     
@@ -123,7 +123,7 @@ const Impressao = () => {
                             >{item?.id_material}</div>
                             <div
                             className='item'
-                            >1</div>
+                            >{item?.qtde}</div>
                             <div
                             className='item'
                             style={{

@@ -12,21 +12,11 @@ const Movimentacoes = () => {
 
     const dispatch = useDispatch()
 
-    const navigator = useNavigate()
-
     const { components, movimentacoes } = useSelector(state => state.app)
 
     useEffect(() => {
-        setComponent('headerVisible', true)
-        dispatch(listAll())
+        dispatch(updateApp({components: {...components, headerVisible: true, printing: false}}))
     }, [])
-
-    
-    const setComponent = (component, value) => {
-        dispatch(updateApp({
-            components: {...components, [component]: value}}
-        ))
-    }
         
     const movimentacoesFiltradas = movimentacoes?.filter(movimentacao => movimentacao.status === "Autorizada")    
 

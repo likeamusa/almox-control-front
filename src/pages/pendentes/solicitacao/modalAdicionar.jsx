@@ -14,6 +14,7 @@ const ModalComponent = () => {
     
     const dispatch = useDispatch()
 
+    const [caData, setCaData] = useState([])
 
     const setComponent = (component, value) => {
         dispatch(updateApp({
@@ -27,7 +28,10 @@ const ModalComponent = () => {
         dispatch(updateApp({
             material: {...material, [name]: value}
         }))
-        console.log(material)
+        
+        const id_material = document.querySelector('input[name="id_material"]').value?.split(' - ')[0]
+
+        setCaData(cadastro?.cadastros?.ca?.filter((item) => item.material_id === parseInt(id_material)))
     }
 
     const handleConfirmar = () => {
@@ -89,36 +93,6 @@ const ModalComponent = () => {
                             placeholder="Digite o nome do material"
                             onChange={handleInputChange}
                             />
-                            <button
-                            className='btn btn-primary'
-                            onClick={() => {
-                                const material_id = document.querySelector('input[name="id_material"]').value?.split(' - ')[0]
-                                if(!material_id) return alert('Selecione um material')
-                                dispatch(apiRequest({
-                                    method: 'GET',
-                                    endpoint: 'c_as',
-                                    param: material_id,
-                                }))
-                                // dispatch(apiRequest({
-                                //     method: 'GET',
-                                //     endpoint: 'notas',
-                                //     param: material_id,
-                                // }))
-                                // dispatch(apiRequest({
-                                //     method: 'GET',
-                                //     endpoint: 'laudos',
-                                //     param: material_id,
-                                // }))
-                                // dispatch(apiRequest({
-                                //     method: 'GET',
-                                //     endpoint: 'lotes',
-                                //     param: material_id,
-                                // }))
-
-                            }}
-                            >
-                                Pesquisar
-                            </button>
                         </div>
 
                         {/* Quantidade */}
@@ -129,6 +103,7 @@ const ModalComponent = () => {
                             <input
                             type="text"
                             name="qtde"
+                            autoComplete='off'
                             className="form-control"
                             onChange={handleInputChange}
                             />
@@ -145,7 +120,7 @@ const ModalComponent = () => {
                             onChange={handleInputChange}
                             >
                                 <option value="">Selecione</option>
-                                {app.c_as?.map((item) => (
+                                {caData?.map((item) => (
                                     <option
                                     key={item?.c_a_}
                                     value={item.c_a_}
@@ -158,46 +133,49 @@ const ModalComponent = () => {
                         </div>
 
                         {/* Numero do lote */}
-                        <b>Número do lote</b>
+                        {/* <b>Número do lote</b>
                         <div
                         className="form-group"
                         >
                             <input
                             disabled={true}
+                            autoComplete='off'
                             type="number"
                             name="n_lote"
                             className="form-control"
                             onChange={handleInputChange}
                             />
-                        </div>
+                        </div> */}
 
                         {/* Numero do laudo */}
-                        <b>Número do laudo</b>
+                        {/* <b>Número do laudo</b>
                         <div
                         className="form-group"
                         >
                             <input
                             disabled={true}
+                            autoComplete="off"
                             type="number"
                             name="n_laudo"
                             className="form-control"
                             onChange={handleInputChange}
                             />
-                        </div>
+                        </div> */}
 
                         {/* n_nota */}
-                        <b>Número da nota</b>
+                        {/* <b>Número da nota</b>
                         <div
                         className="form-group"
                         >
                             <input
                             disabled={true}
+                            autoComplete="off"
                             type="number"
                             name="n_nota"
                             className="form-control"
                             onChange={handleInputChange}
                             />
-                        </div>
+                        </div> */}
 
                         
                     </div>

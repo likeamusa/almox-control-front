@@ -45,8 +45,10 @@ const ModalComponent = ( {cadastroName, onClickProp, onInputChange} ) => {
                             className="form-group"
                             >
                                 <input
-                                type="text"
+                                type={key === "validade" || key === "data" || key === "vencimento" || key === "data_admissao" ? "date" : "text" }
                                 name={key}
+                                autoFocus={index === 0 ? true : false}
+                                autoComplete='off'
                                 value={cadastro.components.cadastroModalData[key]}
                                 className="form-control"
                                 onChange={onInputChange}

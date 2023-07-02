@@ -1,6 +1,5 @@
 import Menu from './menu';
 
-
 const Header = () => {
     
     return (

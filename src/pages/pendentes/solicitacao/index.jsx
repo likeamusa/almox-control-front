@@ -73,6 +73,17 @@ const Saida = () => {
         })
     }
 
+    const materialsWithDescription = materials?.map(material => {
+        
+        const materialDescription = cadastros.material?.find(m => m.id === parseInt(material.id_material))?.descricao
+        const materialUnidade = cadastros.material?.find(m => m.id === parseInt(material.id_material))?.umd
+        return {
+            ...material,
+            descricao: materialDescription,
+            umd: materialUnidade
+        }
+    })
+
     return (
         <>
             <Container>
@@ -86,11 +97,7 @@ const Saida = () => {
                 onClick={() => navigate('/pendentes')}
                 >Voltar</a>
 
-                {/* ADICIONAR */}
-                <a
-                style={{cursor: 'pointer'}}
-                onClick={() => setComponent('saidaModal', true)}
-                >Adicionar item</a>
+                <div></div>
 
                 {/* SALVAR */}
                 <a
@@ -187,7 +194,18 @@ const Saida = () => {
 
             </div>
 
-            <TableComponent data={materials}/>
+            {/* ADICIONAR */}
+            <a
+                style={{
+                    cursor: 'pointer',
+                    alignSelf: 'center',
+                    marginTop: '20px',
+                    marginBottom: '20px',
+                }}
+                onClick={() => setComponent('saidaModal', true)}
+                >Adicionar item</a>
+
+            <TableComponent data={materialsWithDescription}/>
 
             </Container>
 

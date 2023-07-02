@@ -7,7 +7,9 @@ const TableComponent = ({cadastroName, onEdit} ) => {
 
     const height = window.innerHeight - 250;
 
-    const  { cadastros } = useSelector(state => state.app.cadastro)
+    const  { cadastro, components } = useSelector(state => state.app)
+
+    const { cadastros } = cadastro
 
     const data = cadastros[cadastroName]
 
@@ -17,6 +19,7 @@ const TableComponent = ({cadastroName, onEdit} ) => {
         <Table
         data={data}
         height={height}
+        loading={components?.cadastroLoading}
         >
             {
                 dataToColumns?.map((key, index) => (

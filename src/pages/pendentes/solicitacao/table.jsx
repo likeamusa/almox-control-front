@@ -33,7 +33,7 @@ const TableComponent = ({ data }) => {
             {/* material */}
             <Column flexGrow align="center">
                 <HeaderCell>Material</HeaderCell>
-                <Cell dataKey="material" />
+                <Cell dataKey="descricao" />
             </Column>
 
             {/* unidade */}
@@ -58,12 +58,6 @@ const TableComponent = ({ data }) => {
             <Column flexGrow={1} align="center">
                 <HeaderCell>Lote</HeaderCell>
                 <Cell dataKey="n_lote" />
-            </Column>
-
-            {/* n_nota */}
-            <Column flexGrow={1} align="center">
-                <HeaderCell>Nota</HeaderCell>
-                <Cell dataKey="n_nota" />
             </Column>
 
             {/* acoes */}

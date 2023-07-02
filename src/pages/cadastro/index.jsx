@@ -31,8 +31,7 @@ const Cadastro = () => {
     const { cadastro } = useSelector(state => state.app)
 
     useEffect(() => {
-        dispatch(updateApp({components: {...mainComponents, headerVisible: 'material'}}))
-        dispatch(fetchCadastro())
+        dispatch(updateApp({components: {...mainComponents, headerVisible: true, printing: false}}))
     }, [])
 
 

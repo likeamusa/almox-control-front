@@ -1,6 +1,6 @@
-import { all, takeLatest, put, select, call, take } from 'redux-saga/effects';
+import { all, takeLatest, put, select, call } from 'redux-saga/effects';
 import types from './types';
-import { listAll, updateApp } from './actions';
+import { updateApp } from './actions';
 
 import api from '../../../services/api';
 
@@ -75,7 +75,7 @@ export function* saveMovimentacao({ payload }) { // função que faz a requisiç
             return;
         } // se houver erro, retorna o erro
 
-        alert('Movimentação salva com sucesso!'); // alerta de sucesso
+        alert(`Movimentação ${res.data.id_mov} salva com sucesso!`); // alerta de sucesso
         
         yield call(fetchApp); // chama a função fetchApp para atualizar as movimentações
         
@@ -112,17 +112,24 @@ export function* getOneMovimentacao({ payload }) { // função que faz a requisi
 
 export function* fetchCadastro() { // função que faz a requisição de todos os cadstros para a api
 
-    const { cadastro } = yield select(state => state.app); // pega o estado atual da aplicação
+    const { cadastro, components } = yield select(state => state.app); // pega o estado atual da aplicação
 
     
     try {
+
+        put(updateApp({components: {...components, cadastroLoading: true }})); // loading true
         
         const { data: res } = yield api.get('/cadastro'); // faz a requisição para a api
         
         yield put(updateApp({cadastro: {...cadastro, cadastros: res}})); // dispara a action UPDATE_APP com o resultado da requisição
-    } // tenta executar
 
+        yield put(updateApp({components: {...components, cadastroLoading: false }})); // loading false
+        
+    } // tenta executar
+    
     catch (error) {
+        
+        yield put(updateApp({components: {...components, cadastroLoading: false }})); // loading false
 
         alert(error.response); // retorna erro
 
@@ -317,22 +324,29 @@ export function* saveTipoMovimentacao({ payload }) { // função que faz a requi
 // faz login
 export function* login({ payload }) { // função que faz a requisição para a api
 
+    const { components } = yield select(state => state.app); // pega os componentes do estado
+
     try{
 
+        yield put(updateApp({components: {...components, loginLoading: true }})) // atualiza o estado
+        
         const { data: res } = yield api.post('/login', payload); // faz a requisição para a api
-
+        
         const { token } = res; // pega o token da resposta
-
+        
         const { email, matricula, tipo_usuario } = res; // pega o email da resposta
-
+        
+        yield put(updateApp({components: {...components, loginLoading: false}})) // atualiza o estado
+        
         if (email) {
-
+            
             yield put(updateApp({ usuario: { email, matricula, tipo_usuario }}))
-
+            
         }
-
+        
+        
         if (token) { // se o token existir
-
+            
             // registra o token no localStorage
             localStorage.setItem('@almox-control/token', token);
             localStorage.setItem('@almox-control/email', email);
@@ -342,10 +356,13 @@ export function* login({ payload }) { // função que faz a requisição para a 
             window.location.href = '/';
             
         }
- 
+        
+        
     }
-
+    
     catch (error) {
+        
+        yield put(updateApp({components: {...components, loginLoading: false}})) // atualiza o estado
 
         alert(JSON.stringify(error)) // retorna erro
 
