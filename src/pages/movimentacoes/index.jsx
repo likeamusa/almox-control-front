@@ -4,6 +4,8 @@ import { listAll } from '../../store/modules/app/actions'
 import { updateApp } from '../../store/modules/app/actions'
 import { useNavigate } from 'react-router-dom'
 
+import jsonToExcel from '../../utils/jsonToExcel'
+
 import Container from "../../components/container";
 import TableComponent from './components/table'
 import Barra from './components/bar'
@@ -34,7 +36,9 @@ const Movimentacoes = () => {
                 {/* exportar */}
                 <a
                 style={{cursor: 'pointer'}}
-                onClick={() => alert("exportar")}>
+                onClick={() => {
+                    jsonToExcel(movimentacoes, 'movimentacoes')
+                }}>
                     Exportar
                 </a>
 
