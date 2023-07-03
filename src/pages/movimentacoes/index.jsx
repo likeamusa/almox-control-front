@@ -37,7 +37,7 @@ const Movimentacoes = () => {
                 <a
                 style={{cursor: 'pointer'}}
                 onClick={() => {
-                    jsonToExcel(movimentacoes, 'movimentacoes')
+                    jsonToExcel(movimentacoesFiltradas, 'movimentacoes')
                 }}>
                     Exportar
                 </a>
