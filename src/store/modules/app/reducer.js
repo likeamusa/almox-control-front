@@ -16,6 +16,12 @@ const INITIAL_STATE = {
         printing: true,
     },
     movimentacaoASerAutorizada: {},
+    estoque: {
+        components: {
+            materialSelecionado: '',
+            centroSelecionado: '',
+        },
+    },
     movimentacaoToPrint: {},
     material: {},
     materials: [],
@@ -33,6 +39,7 @@ const INITIAL_STATE = {
     },
     movimentacoes: [],
     online: false,
+    saldoEstoque: []
 }
 
 const app = (state = INITIAL_STATE, action) => {

@@ -116,3 +116,10 @@ export const login = (data) => {
         payload: data
     };
 }
+
+export const getEstoque = (data) => {
+    return {
+        type: types.GET_ESTOQUE,
+        payload: data
+    };
+};

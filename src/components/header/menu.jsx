@@ -57,6 +57,16 @@ const Menu = ({ location }) => {
                 <a>Movimentaçoes</a>
             </Item>
 
+            <Item
+            style={tabSizeStyle}
+            eventKey='estoque'
+            onClick={() => {
+                navigate('/estoque')
+            }}
+            >
+                <a>Estoque</a>
+            </Item>
+
 
             <Item 
             style={tabSizeStyle}

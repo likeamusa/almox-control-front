@@ -9,6 +9,7 @@ import Header from "./components/header";
 import Impressao from "./pages/impressao";
 import Login from "./pages/login";
 import Requester from "./pages/requester";
+import Estoque from "./pages/estoque";
 
 
 const App = () => {
@@ -35,6 +36,7 @@ const App = () => {
             <Route path="/solicitacao" element={<Solicitacao />} />
             <Route path="/pendentes" element={<Pendentes />} />
             <Route path="/cadastro" element={<Cadastro />} />
+            <Route path="/estoque" element={<Estoque />} />
           </Switch>
         </>
         

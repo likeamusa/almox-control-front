@@ -16,6 +16,7 @@ const types = {
     API_REQUEST: '@app/API_REQUEST',
     SAVE_TIPO_MOVIMENTACAO: '@app/SAVE_TIPO_MOVIMENTACAO',
     LOGIN: '@app/LOGIN',
+    GET_ESTOQUE: '@app/GET_ESTOQUE',
     
     
 };

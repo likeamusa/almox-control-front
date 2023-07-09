@@ -392,6 +392,25 @@ export function* autorizarMovimentacao({ payload }) { // função que faz a requ
 
 }
 
+// Consulta o saldo de estoque
+export function* saldoEstoque({ payload }) { // função que faz a requisição para a api
+
+    try{
+
+        const { data: res } = yield api.get(`/estoque`); // faz a requisição para a api
+
+        yield put(updateApp({ saldoEstoque: res?.data })); // atualiza o estado
+
+    } // tenta executar
+
+    catch (error) {
+            
+            alert(JSON.stringify(error)) // retorna erro
+    
+    } // retorna erro
+
+}
+
 export default all([
     
     takeLatest(types.LIST_ALL, fetchApp),
@@ -410,5 +429,6 @@ export default all([
     takeLatest(types.GET_MOVIMENTACAO, getOneMovimentacao),
     takeLatest(types.API_REQUEST, apiRequest),
     takeLatest(types.LOGIN, login),
+    takeLatest(types.GET_ESTOQUE, saldoEstoque),
 
 ]); // dispara a função fetchApp quando a action LIST_ALL for disparada
