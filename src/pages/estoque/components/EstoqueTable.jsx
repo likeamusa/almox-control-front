@@ -29,6 +29,12 @@ const EstoqueTable = ({ data }) => {
                 <Cell dataKey="descricao" />
             </Column>
 
+            {/* n_ca */}
+            <Column width={200} align="center" fixed>
+                <HeaderCell>Nº CA</HeaderCell>
+                <Cell dataKey="n_ca" />
+            </Column>
+            
 
             {/* quantidade */}
             <Column width={200} align="center" fixed>
