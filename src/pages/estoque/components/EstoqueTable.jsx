@@ -30,10 +30,10 @@ const EstoqueTable = ({ data }) => {
             </Column>
 
             {/* n_ca */}
-            <Column width={200} align="center" fixed>
+            {/* <Column width={200} align="center" fixed>
                 <HeaderCell>Nº CA</HeaderCell>
                 <Cell dataKey="n_ca" />
-            </Column>
+            </Column> */}
             
 
             {/* quantidade */}

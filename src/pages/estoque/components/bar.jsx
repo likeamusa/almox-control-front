@@ -6,8 +6,9 @@ const Barra = ({children}) => {
             style={{
                 backgroundColor: '#e1e5f2',
                 width: '100%',
+                height: '50px',
                 display: 'flex',
-                justifyContent: 'space-evenly',
+                justifyContent: 'space-between',
                 alignItems: 'center',
                 padding: '0 20px',
             }}

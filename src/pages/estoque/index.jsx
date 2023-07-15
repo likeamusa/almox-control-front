@@ -4,7 +4,6 @@ import Table from "./components/EstoqueTable";
 import Autocomplete from "../../components/autocomplete";
 import { useSelector, useDispatch } from "react-redux";
 import { getEstoque } from "../../store/modules/app/actions";
-import { useState } from "react";
 
 const Saldo = () => {
 
@@ -12,36 +11,27 @@ const Saldo = () => {
 
     const { app } = useSelector(state => state)
 
-    // cria um array de objetos com id e nome
-    const materialData = app?.cadastro?.cadastros?.material?.map((item) => {
-        return {
-            id: item.id,
-            nome: `${item.id} - ${item.descricao}`
-        }
-    })
-
-    const [material, setMaterial] = useState('')
-    const [centro, setCentro] = useState('')
-
-    const filteredData = app?.saldoEstoque?.filter((item) => {
-        if (material === '' && centro === '') {
-            return item
-        } else {
-            if (material !== '' && centro === '') {
-                return item.id_material === material
-            } else if (material === '' && centro !== '') {
-                return item.id_centro === centro
-            } else {
-                return item.id_material === material && item.id_centro === centro
+    // soma todos os saldos de estoque de cada material
+    const saldoEstoqueSomado = app?.saldoEstoque?.reduce((acc, item) => {
+        if(!acc[item.id_material]){
+            acc[item.id_material] = {
+                nome_centro: item.nome_centro,
+                id_material: item.id_material,
+                saldo: 0,
+                descricao: item.descricao,
             }
         }
-    })
+        acc[item.id_material].saldo += parseInt(item.saldo)
+        return acc
+    }, {})
 
+    // transforma o objeto em array
+    const saldoConcatendado = Object.values(saldoEstoqueSomado)
 
     return <>
         <Container>
             <Barra>
-                <div
+                {/* <div
                 style={{
                     marginTop: '15px',
                     width: '300px',
@@ -58,8 +48,8 @@ const Saldo = () => {
                         setMaterial(parseInt(value))
                     }}
                     />
-                </div>
-                <select 
+                </div> */}
+                {/* <select 
                 onChange={(e => {
                     const value = e.target.value.split(' - ')[1]
                     setCentro(parseInt(value))
@@ -75,20 +65,7 @@ const Saldo = () => {
                     {app?.cadastro?.cadastros?.centro?.map((item) => {
                         return <option value={item.id_centro}>{item.id_centro} - {item.descricao}</option>
                     })}
-                </select>
-                <a
-                onClick={() => {
-                    setMaterial('')
-                    setCentro('')
-                    document.querySelector('input[name="material"]').value = ''
-                    document.querySelector('select[name="centro"]').value = 'centro'
-                }}
-                style={{
-                    cursor: 'pointer',
-                }}
-                >
-                    Limpar filtros
-                </a>
+                </select> */}
                 <a
                 style={{
                     cursor: 'pointer',
@@ -99,7 +76,7 @@ const Saldo = () => {
                     Atualizar
                 </a>
             </Barra>
-            <Table data={filteredData} />
+            <Table data={saldoConcatendado} />
         </Container>
     
     </>
