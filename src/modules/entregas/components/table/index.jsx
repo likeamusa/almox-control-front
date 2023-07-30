@@ -11,7 +11,7 @@ export default function TableComponent({ data, config, ...props }) {
         <Table height={400} data={data} cellBordered bordered>
                 {/* matricula */}
                 <Column width={120} align="center">
-                    <HeaderCell>Matricula</HeaderCell>
+                    <HeaderCell className='font-bold'>Matricula</HeaderCell>
                     <Cell dataKey="matricula">
                         {rowData => {
                             return (
@@ -26,19 +26,19 @@ export default function TableComponent({ data, config, ...props }) {
 
                 {/* nome */}
                 <Column flexGrow={1} align='center'>
-                    <HeaderCell>Nome</HeaderCell>
+                    <HeaderCell className='font-bold'>Nome</HeaderCell>
                     <Cell dataKey="nome" />
                 </Column>
 
                 {/* funcao */}
                 <Column flexGrow={1} align='center'>
-                    <HeaderCell>Função</HeaderCell>
+                    <HeaderCell className='font-bold'>Função</HeaderCell>
                     <Cell dataKey="funcao" />
                 </Column>
 
                 {/* status */}
                 <Column width={100} align='center'>
-                    <HeaderCell>Status</HeaderCell>
+                    <HeaderCell className='font-bold'>Status</HeaderCell>
                     <Cell dataKey="status" />
                 </Column>
 

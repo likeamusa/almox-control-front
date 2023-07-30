@@ -36,14 +36,16 @@ export default function ColaboradorPage() {
                 >
                     Voltar
                 </a>
-                <h1>{matricula}</h1>
+                <h1
+                className="text-2xl font-bold"
+                >{matricula}</h1>
             </div>
             <div
                 className="h-auto bg-zinc-100 w-full m-auto flex flex-col justify-center border border-gray-400 rounded-md"
             >
 
                 <h1 className='text-2xl font-bold m-auto'>
-                    EPIs e Uniformes
+                    EPIs e Uniforme
                 </h1>
 
                 <div className="flex justify-between items-center h-11 bg-zinc-300 px-4">

@@ -58,8 +58,9 @@ export default function ColabFerramentalTableComponent({ data }) {
                 <CheckCell
                     dataKey="material"
                     checkedKeys={checkedKeys}
-                    onChange={checkedKeys => {
-                        setCheckedKeys(checkedKeys);
+                    onChange={checked => {
+                        const keys = checked ? [...checkedKeys, checked] : checkedKeys.filter(item => item !== checked);
+                        setCheckedKeys(keys);
                     }}
                 />
             </Column>
