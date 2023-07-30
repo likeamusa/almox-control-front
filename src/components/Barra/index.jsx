@@ -1,20 +1,11 @@
 
-const Barra = ({children}) => {
+const Barra = ({children, ...props }) => {
 
     return (
         <div
-            style={{
-                backgroundColor: '#e1e5f2',
-                width: '100%',
-                height: '50px',
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                padding: '0 20px',
-            }}
+            className={`h-11 flex bg-zinc-200 items-center px-4 ${props.className}`}
             >
                 {children}
-
             </div>
     )
 }
