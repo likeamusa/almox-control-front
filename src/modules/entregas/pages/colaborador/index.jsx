@@ -24,7 +24,7 @@ const data = [
 export default function ColaboradorPage() {
     
     const [modalType, setModalType] = useState('devolucao');
-    const [openModal, setOpenModal] = useState(true);
+    const [openModal, setOpenModal] = useState(false);
     
     const navigate = useNavigate();
 
