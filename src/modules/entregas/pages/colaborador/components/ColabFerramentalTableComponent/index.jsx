@@ -1,9 +1,41 @@
-import { Table } from "rsuite";
+import { useState } from "react";
+import { Checkbox, Table } from "rsuite";
 
 const { Column, HeaderCell, Cell } = Table;
 
 export default function ColabFerramentalTableComponent({ data }) {
 
+    const [checkedKeys, setCheckedKeys] = useState([]);
+    let checked = false;
+    const indeterminate = false;
+
+    if (checkedKeys.length === data.length) {
+        checked = true;
+    } else if (checkedKeys.length === 0) {
+        checked = false;
+    } else if (checkedKeys.length > 0 && checkedKeys.length < data.length) {
+        indeterminate = true;
+    }
+
+    const handleCheckAll = (value, checked) => {
+        const keys = checked ? data.map(item => item.material) : [];
+        setCheckedKeys(keys);
+    }
+
+    const CheckCell = ({ rowData, onChange, checkedKeys, dataKey, ...props }) => (
+        <Cell {...props} style={{ padding: 0 }}>
+            <div
+                className='leading-10 flex items-center justify-center'
+            >
+                <Checkbox
+                    value={rowData[dataKey]}
+                    inline
+                    onChange={onChange}
+                    checked={checkedKeys.some(item => item === rowData[dataKey])}
+                />
+            </div>
+        </Cell>
+    );
 
     return (
         <Table
@@ -12,6 +44,25 @@ export default function ColabFerramentalTableComponent({ data }) {
             bordered
             cellBordered
             >
+            <Column width={50} align='center'>
+                <HeaderCell style={{ padding: 0 }}>
+                    <div className='leading-10 flex items-center justify-center'>
+                        <Checkbox
+                            inline
+                            checked={checked}
+                            indeterminate={indeterminate}
+                            onChange={handleCheckAll}
+                        />
+                    </div>
+                </HeaderCell>
+                <CheckCell
+                    dataKey="material"
+                    checkedKeys={checkedKeys}
+                    onChange={checkedKeys => {
+                        setCheckedKeys(checkedKeys);
+                    }}
+                />
+            </Column>
 
             <Column width={120} align='center'>
                 <HeaderCell className='font-bold'>Código</HeaderCell>
