@@ -4,13 +4,13 @@ import { useState } from "react";
 
 const data = [
     {
-        matricula: '2019000001',
+        matricula: '19859',
         nome: 'João da Silva',
         funcao: 'Auxiliar de Almoxarifado',
         status: 'Irregular',
     },
     {
-        matricula: '2019000002',
+        matricula: '19858',
         nome: 'Maria da Silva',
         funcao: 'Auxiliar de Administrativo',
         status: 'Regular',
