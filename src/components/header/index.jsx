@@ -39,6 +39,7 @@ const Header = () => {
             }}
             >   
                 <span>{localStorage.getItem('@almox-control/matricula')}</span>
+                <span>Rio Verde-Go</span>
                 <a
                 className='cursor-pointer text-blue-500 hover:text-blue-600'
                 onClick={() => {
