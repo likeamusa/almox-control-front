@@ -1,5 +1,5 @@
 import Container from "../../components/container";
-import Barra from "../../pages/estoque/components/bar";
+import Barra from "../../components/Barra";
 
 export default function Compras() {
   return (
