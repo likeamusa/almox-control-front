@@ -1,70 +1,50 @@
-# Getting Started with Create React App
+# Almox-Control
+## Prioridades
+- [ ] Modulo de controle des entrega de epis, epcs, uniformes e ferramentais e controle de vencimentos
+- [ ] Modulo de controle de estoque e movimentacoes (transacoes de estoque)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Secundario
+- [ ] Relatorios
+- [ ] Modulo de compras
+## Entregas
+- [ ] Criar modal de fornecimento/troca/devolucao de epis e epcs
+- [ ] Criar modal de fornecimento/troca/devolucao de uniformes
 
-## Available Scripts
 
-In the project directory, you can run:
+## Estoque
+- [ ] Coluna de cenario de estoque baseado no consumo medio e correlacionado com o pedido de compras
+    - [ ] Atende
+    - [ ] Regular
+    - [ ] Critico
+    - [ ] Muito Critico
+    - [ ] RPC (Realizar pedido de compra)
+- [ ] Adicionar filtros para cada coluna na tabela de estoque
+- O filtro de centro é visivel apenas para o usuario com privilegios de administrador
+- [ ] Coluna valor -> Valor médio do item
+## Movimentações
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Compras
+- materiais e servicos
+#### O modulo de compras será responsavel por gerenciar as requisicos e pedidos de compra
+- No front tabela de acompanhemento de todos itens com os status "critico", "muito critico" e "RPC".
+- No front tabela de acompanhamento de todas as requisicoes de compra
+- No front dentro da rc uma tabela com o acompanhamento de todos os itens requisitados.
+- Deve ter uma tabela propria de rc e pc - db
+- Relacionada com o estoque (RPC) - db
+- Deve ter um botao para criar requisicao de compra
+- cadastrar requisicao de compra
+- cadastrar pedidos de compra
+- O requisicao de compras pode ter varios pedidos de compras
+- A tabela de pc no banco de dados esta relacionada com a tabela de rc - db
+- A coluna de status da tabela de rc esta relacionada com
+- O status da requisicao de compras só fica como "atendido" quando todos os itens forem atendidos
+- O status do pedido está relacionado com a entrada da minha nota fiscal
+#### Exemplos:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+![Alt text](image-2.png)
+![Alt text](image-3.png)
+## Cadastros
+#### O modulo de cadastros será responsavel por gerenciar os cadastros de fornecedores, produtos, colaborares, etc
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- [ ] Criar cadastro de ghe para cada funcao
