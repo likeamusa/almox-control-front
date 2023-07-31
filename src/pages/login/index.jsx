@@ -30,42 +30,24 @@ const Login = () => {
         <>
             { components.loginLoading && <Loader backdrop content="Carregando..." vertical size="md" speed='slow' center />}
             <div
-            style={{
-                width: '100vw',
-                height: '100vh',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-            }}
+            className='h-screen w-screen flex justify-center items-center'
             >
                 <form
                 id='login-form'
-                style={{
-                    width: '400px',
-                    height: '300px',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    justifyContent: 'space-evenly',
-                    alignItems: 'center',
-                    border: '1px solid #ccc',
-                    borderRadius: '5px',
-                    padding: '20px',
-                    
-                }}
+                className='h-96 w-96 flex flex-col justify-center items-center bg-zinc-200 rounded-md p-6'
                 onSubmit={handleLogin}
                 >
                     <input
-                    className='form-control'
+                    className='w-full h-10 mb-2 placeholder:p-2 focus:border-blue-500 border-none p-2'
                     form='login-form'
                     autoFocus
                     type="text"
-                    
                     placeholder="Matricula" 
                     onChange={e => setEmail(e.target.value)} 
                     />
 
                     <input
-                    className='form-control'
+                    className='w-full h-10 mb-2 placeholder:p-2 focus:border-blue-500 border-none p-2'
                     form='login-form'
                     min={6}
                     type="password"
@@ -74,7 +56,7 @@ const Login = () => {
                     />
 
                     <button
-                    className='btn btn-primary'
+                    className='h-10 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'
                     style={{
                         width: '100%',
                     }}

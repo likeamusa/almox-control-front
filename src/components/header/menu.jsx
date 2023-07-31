@@ -14,16 +14,6 @@ const Menu = ({ location }) => {
 
     const navigate = useNavigate();
 
-    const dispatch = useDispatch();
-
-    const { components } = useSelector(state => state.app)
-
-    const setComponent = (component, value) => {
-        dispatch(updateApp({
-            components: {...components, [component]: value}}
-        ))
-    }
-
     const tabSizeStyle = {
         width: 200,
         display: 'flex',
@@ -39,26 +29,6 @@ const Menu = ({ location }) => {
         >
             <Item 
             style={tabSizeStyle}
-            eventKey='pendentes'
-            onClick={() => {
-                navigate('/pendentes')
-            }}
-            >
-                <a>Pendentes</a>
-            </Item>
-            
-            <Item 
-            style={tabSizeStyle}
-            eventKey='movimentacoes'
-            onClick={() => {
-                navigate('/movimentacoes')
-            }}
-            >
-                <a>Movimentaçoes</a>
-            </Item>
-
-            <Item
-            style={tabSizeStyle}
             eventKey='estoque'
             onClick={() => {
                 navigate('/estoque')
@@ -67,16 +37,39 @@ const Menu = ({ location }) => {
                 <a>Estoque</a>
             </Item>
 
-
-            <Item 
+            <Item
             style={tabSizeStyle}
-            eventKey='cadastro'
+            eventKey={'entregas' || 'entregas/colaboradores/:matricula'}
             onClick={() => {
-                navigate('/cadastro')
+                navigate('/entregas')
             }}
             >
-                <a>Cadastro</a>
+                <a>Entregas</a>
             </Item>
+
+            <Item
+            style={tabSizeStyle}
+            eventKey='compras'
+            onClick={() => {
+                navigate('/compras')
+            }} 
+            >
+                <a>Compras</a>
+            </Item>
+
+            {/* cadastros */}
+            <Item
+            style={tabSizeStyle}
+            eventKey='cadastros'
+            onClick={() => {
+                navigate('/cadastros')
+            }}
+            >
+                <a>Cadastros</a>
+            </Item>
+            
+
+            
         </Nav>
     )
 };

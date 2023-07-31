@@ -1,17 +1,11 @@
-import SubContainer from "./subContainer";
+
 
 const Container = ({ children }) => {
     return (
-        <div 
-        style={{
-            backgroundColor: '#edf6f9',
-            height: '100vh',
-            width: '100vw',
-        }}  
+        <div
+            className="h-auto bg-zinc-100 w-[80%] m-auto flex flex-col justify-center gap-3 p-3 border border-gray-300 overflow-y-auto"
         >
-        <SubContainer>
             {children}
-        </SubContainer>
         </div>
     );
 }

@@ -39,10 +39,9 @@ const Header = () => {
             }}
             >   
                 <span>{localStorage.getItem('@almox-control/matricula')}</span>
+                <span>Rio Verde-Go</span>
                 <a
-                style={{
-                    cursor: 'pointer',
-                }}
+                className='cursor-pointer text-blue-500 hover:text-blue-600'
                 onClick={() => {
                     localStorage.removeItem('@almox-control/token');
                     window.location.href = '/';
