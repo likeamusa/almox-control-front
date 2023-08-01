@@ -3,7 +3,7 @@ import { useState } from 'react'
 
 const { Column, HeaderCell, Cell } = Table;
 
-export default function TableEntregasComponent({ data }) {
+export default function TableEntregasComponent({ data, onClick }) {
 
     const [checkedKeys, setCheckedKeys] = useState([]);
     let checked = false;
@@ -66,6 +66,18 @@ export default function TableEntregasComponent({ data }) {
                 />
             </Column>
 
+            {/* indice */}
+            <Column width={50} align='center'>
+                <HeaderCell className='font-bold'>#</HeaderCell>
+                <Cell>
+                    {(rowData, rowIndex) => {
+                        return (
+                            <span>{rowIndex + 1}</span>
+                        );
+                    }}
+                </Cell>
+            </Column>
+
             <Column width={120} align='center'>
                 <HeaderCell className='font-bold'>Código</HeaderCell>
                 <Cell dataKey="material" />
@@ -74,11 +86,6 @@ export default function TableEntregasComponent({ data }) {
             <Column flexGrow={2} align='center'>
                 <HeaderCell className='font-bold'>Descrição</HeaderCell>
                 <Cell dataKey="descricao" />
-            </Column>
-
-            <Column width={100} align='center'>
-                <HeaderCell className='font-bold'>Quantidade</HeaderCell>
-                <Cell dataKey="quantidade" />
             </Column>
 
             <Column flexGrow={1} align='center'>
@@ -104,12 +111,12 @@ export default function TableEntregasComponent({ data }) {
                         return (
                             <span>
                                 <a
-                                    onClick={() => { alert(`Devolver ${rowData.descricao}`) }}
+                                    onClick={() => onClick(onClick())}
                                     className='cursor-pointer text-blue-500 hover:text-blue-600'
                                 >Devolução</a>
                                 {' | '}
                                 <a
-                                    onClick={() => { alert(`Trocar ${rowData.descricao}`) }}
+                                    onClick={() => onClick(onClick())}
                                     className='cursor-pointer text-blue-500 hover:text-blue-600'
                                 >Troca</a>
                             </span>

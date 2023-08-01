@@ -6,11 +6,23 @@ export default function HistoryColabMaterialTableComponent({ data }) {
 
     return (
         <Table
-        height={300}
-        data={data}
-        bordered
-        cellBordered
+            height={300}
+            data={data}
+            bordered
+            cellBordered
         >
+            {/* indice */}
+            <Column width={50} align='center'>
+                <HeaderCell className='font-bold'>#</HeaderCell>
+                <Cell>
+                    {(rowData, rowIndex) => {
+                        return (
+                            <span>{rowIndex + 1}</span>
+                        );
+                    }}
+                </Cell>
+            </Column>
+
             <Column width={100} align="center" >
                 <HeaderCell className='font-bold'>Material</HeaderCell>
                 <Cell dataKey="material" />

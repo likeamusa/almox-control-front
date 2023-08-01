@@ -3,7 +3,7 @@ import { Checkbox, Table } from "rsuite";
 
 const { Column, HeaderCell, Cell } = Table;
 
-export default function ColabFerramentalTableComponent({ data }) {
+export default function ColabFerramentalTableComponent({ data, onClick }) {
 
     const [checkedKeys, setCheckedKeys] = useState([]);
     let checked = false;
@@ -43,7 +43,7 @@ export default function ColabFerramentalTableComponent({ data }) {
             data={data}
             bordered
             cellBordered
-            >
+        >
             <Column width={50} align='center'>
                 <HeaderCell style={{ padding: 0 }}>
                     <div className='leading-10 flex items-center justify-center'>
@@ -65,6 +65,18 @@ export default function ColabFerramentalTableComponent({ data }) {
                 />
             </Column>
 
+            {/* indice */}
+            <Column width={50} align='center'>
+                <HeaderCell className='font-bold'>#</HeaderCell>
+                <Cell>
+                    {(rowData, rowIndex) => {
+                        return (
+                            <span>{rowIndex + 1}</span>
+                        );
+                    }}
+                </Cell>
+            </Column>
+
             <Column width={120} align='center'>
                 <HeaderCell className='font-bold'>Código</HeaderCell>
                 <Cell dataKey="material" />
@@ -74,12 +86,6 @@ export default function ColabFerramentalTableComponent({ data }) {
             <Column flexGrow={1} align='center'>
                 <HeaderCell className='font-bold'>Descrição</HeaderCell>
                 <Cell dataKey="descricao" />
-            </Column>
-
-            {/* quantidade */}
-            <Column width={100} align='center'>
-                <HeaderCell className='font-bold'>Quantidade</HeaderCell>
-                <Cell dataKey="quantidade" />
             </Column>
 
             {/* data_entrega */}
@@ -96,12 +102,12 @@ export default function ColabFerramentalTableComponent({ data }) {
                         return (
                             <span>
                                 <a
-                                    onClick={() => { alert(`Devolver ${rowData.descricao}`) }}
+                                    onClick={() => onClick(onClick())}
                                     className='cursor-pointer text-blue-500 hover:text-blue-600'
                                 >Devolução</a>
                                 {' | '}
                                 <a
-                                    onClick={() => { alert(`Trocar ${rowData.descricao}`) }}
+                                    onClick={() => onClick(onClick())}
                                     className='cursor-pointer text-blue-500 hover:text-blue-600'
                                 >Troca</a>
                             </span>
