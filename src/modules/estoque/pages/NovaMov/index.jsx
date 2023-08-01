@@ -1,6 +1,7 @@
 import Container from "../../../../components/container";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import NovMovTable from "../../components/NovMovTable";
 
 
 export default function NovaMov() {
@@ -8,6 +9,18 @@ export default function NovaMov() {
     const [tipoMov, setTipoMov] = useState('');
 
     const navigate = useNavigate();
+
+    const data = [
+        {
+            materialId: 123,
+            descricao: "luva de vaqueta",
+            quantidade: 2,
+            umb: "UN",
+            c_a_: 1234,
+            laudo: '5027052/0752067',
+            lote: 20584,
+        }
+    ]
 
     return (
         <Container>
@@ -20,6 +33,21 @@ export default function NovaMov() {
                     className="text-blue-500 hover:text-blue-600 cursor-pointer"
                 >
                     Cancelar
+                </a>
+
+                <a
+                    onClick={() => navigate('/estoque')}
+                    className="text-blue-500 hover:text-blue-600 cursor-pointer"
+                >
+                    Adicionar
+                </a>
+
+                {/* salvar */}
+                <a
+                    onClick={() => navigate('/estoque')}
+                    className="text-blue-500 hover:text-blue-600 cursor-pointer"
+                >
+                    Salvar
                 </a>
 
                 {/* tipo de entrada */}
@@ -70,6 +98,8 @@ export default function NovaMov() {
                     />
                 </div>
             )}
+
+            <NovMovTable data={data} />
 
         </Container>
     )
