@@ -1,12 +1,11 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { Modal } from "rsuite";
+
 import Container from "../../../../components/container";
 import ColabEpiTableComponent from "./components/TableEntregas";
 import HistoryColabMaterialTableComponent from "./components/HistoryColabMaterialTable";
 import ColabFerramentalTableComponent from "./components/ColabFerramentalTableComponent";
-
-const { Body, Footer, Header, Title } = Modal;
+import ColabEpcsTableComponent from "./components/ColabEpcsTableComponent";
 
 const data = [
     {
@@ -19,49 +18,20 @@ const data = [
     }
 ];
 
-
+const colab = {
+    funcaoId: 2
+}
 
 export default function ColaboradorPage() {
-    
-    const [modalType, setModalType] = useState('devolucao');
-    const [openModal, setOpenModal] = useState(false);
-    
+
+    const [showForm, setShowForm] = useState(false);
+
     const navigate = useNavigate();
 
     const { matricula } = useParams();
 
     return (
         <Container>
-            <Modal
-                open={openModal}
-                onHide={() => { }}
-                size='lg'
-            >
-                <Header>
-                    <Title>{modalType === 'troca' && 'Troca de EPI' || modalType === 'devolucao' && 'Devolução de EPI'}</Title>
-                </Header>
-                <Body>
-                    
-                </Body>
-                <Footer>
-                    <div
-                    className="flex justify-between items-center h-1 px-4"
-                    >
-                        <a 
-                        className="text-blue-500 hover:text-blue-600 cursor-pointer"
-                        onClick={() => setOpenModal(false)}
-                        >
-                            Cancelar
-                        </a>
-                        <a 
-                        className="text-blue-500 hover:text-blue-600 cursor-pointer"
-                        onClick={() => setOpenModal(false)}
-                        >
-                            Confirmar
-                        </a>
-                    </div>
-                </Footer>
-            </Modal>
 
             <div
                 className="flex justify-between items-center h-11 bg-zinc-300 px-4"
@@ -77,7 +47,73 @@ export default function ColaboradorPage() {
                     className="text-2xl font-bold"
                 >{matricula}</h1>
             </div>
-            <div
+
+            {/* Form */}
+
+            {showForm && (
+
+
+                < div
+                    className="h-auto bg-zinc-100 w-full m-auto flex flex-col justify-center border border-gray-400 rounded-md p-4"
+                >
+                    <h1 className='text-2xl font-bold m-auto'>
+                        Novo Fornecimento / Troca / Devolução
+                    </h1>
+                    <form
+                        className="flex flex-row justify-evenly items-center h-11 bg-zinc-300 p-4"
+                    >
+
+                        {/* material */}
+                        <input
+                            type="text"
+                            placeholder="Material"
+                            className="w-60 h-8 border border-gray-400 rounded-md px-2"
+                        />
+
+                        {/* quantidade */}
+                        <input
+                            type="number"
+                            placeholder="Quantidade"
+                            className="w-30 h-8 border border-gray-400 rounded-md px-2"
+                        />
+
+                        {/* proxima entrega */}
+                        <input
+                            type="date"
+                            placeholder="Proxima Entrega"
+                            className="w-50 h-8 border border-gray-400 rounded-md px-2"
+                        />
+
+                        {/* observacao */}
+                        <textarea
+                            placeholder="Observacao"
+                            className="w-60 h-8 border border-gray-400 rounded-md px-2"
+                        />
+
+                        {/* botao salvo */}
+                        <button
+                            className="bg-blue-500 hover:bg-blue-300 text-white font-bold py-2 px-4 rounded"
+                            onClick={() => alert('Salvo')}
+                        >
+                            Salvar
+                        </button>
+
+                        {/* botao cancelar */}
+                        <button
+                            className="bg-gray-400 hover:bg-gray-200 text-white font-bold py-2 px-4 rounded"
+                            onClick={() => setShowForm(false)}
+                        >
+                            Cancelar
+                        </button>
+                    </form>
+
+                </div>
+            )}
+
+
+            {/* epis e uniforme */}
+
+            < div
                 className="h-auto bg-zinc-100 w-full m-auto flex flex-col justify-center border border-gray-400 rounded-md"
             >
 
@@ -94,10 +130,10 @@ export default function ColaboradorPage() {
                     </a>
                 </div>
 
-                <ColabEpiTableComponent data={data} />
+                <ColabEpiTableComponent data={data} onClick={() => setShowForm(true)} />
             </div>
 
-
+            {/* ferramental */}
             <div
                 className="h-auto bg-zinc-100 w-full m-auto flex flex-col justify-center border border-gray-400 rounded-md"
             >
@@ -110,10 +146,32 @@ export default function ColaboradorPage() {
                 <div className="flex justify-center items-center h-11 bg-zinc-300 px-4">
                 </div>
 
-                <ColabFerramentalTableComponent data={data} />
+                <ColabFerramentalTableComponent data={data} onClick={() => setShowForm(true)} />
 
             </div>
 
+            {/* epcs */}
+            {
+                colab.funcaoId === 2 &&
+                <div
+                    className="h-auto bg-zinc-100 w-full m-auto flex flex-col justify-center border border-gray-400 rounded-md"
+                >
+                    <h1
+                        className="text-2xl font-bold m-auto"
+                    >
+                        EPCs
+                    </h1>
+                    {/* barra de funcoes */}
+                    <div className="flex justify-center items-center h-11 bg-zinc-300 px-4">
+                    </div>
+
+                    {/* tabela */}
+                    <ColabEpcsTableComponent data={data} onClick={() => setShowForm(true)} />
+
+                </div>
+            }
+
+            {/* historico */}
             <div
                 className="h-auto bg-zinc-100 w-full m-auto flex flex-col justify-center border border-gray-400 rounded-md"
             >
@@ -135,6 +193,6 @@ export default function ColaboradorPage() {
                 <HistoryColabMaterialTableComponent data={data} />
             </div>
 
-        </Container>
+        </Container >
     );
 }

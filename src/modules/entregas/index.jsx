@@ -12,7 +12,7 @@ const data = [
     {
         matricula: '19858',
         nome: 'Maria da Silva',
-        funcao: 'Auxiliar de Administrativo',
+        funcao: 'Encarregado',
         status: 'Regular',
     }
 ];
