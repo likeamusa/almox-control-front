@@ -11,6 +11,8 @@ import FilialTab from "../tabs/filial";
 import CaTab from "../tabs/c_a_";
 import LoteTab from "../tabs/lote";
 import LaudoTab from "../tabs/laudo";
+import FuncaoTab from "../tabs/funcao"
+import Ghe from "../tabs/ghe";
 
 
 const { Item } = Nav;
@@ -121,6 +123,25 @@ export default function MainCadastrosPage() {
                 >
                     Laudo
                 </Item>
+
+                {/* funcao */}
+                <Item
+                    eventKey="funcao"
+                    style={tabSizeStyle}
+                    onClick={() => setActiveKey('funcao')}
+                >
+                    Funcao
+                </Item>
+
+                {/* ghe */}
+                <Item
+                    eventKey="ghe"
+                    style={tabSizeStyle}
+                    onClick={() => setActiveKey('ghe')}
+                >
+                    Ghe
+                </Item>
+
             </Nav>
 
             {/* tabs */}
@@ -134,7 +155,8 @@ export default function MainCadastrosPage() {
                 {activeKey === 'c.a.' && <CaTab />}
                 {activeKey === 'lote' && <LoteTab />}
                 {activeKey === 'laudo' && <LaudoTab />}
-
+                {activeKey === 'funcao' && <FuncaoTab />}
+                {activeKey === 'ghe' && <Ghe />}
             </div>
         </Container>
     )
