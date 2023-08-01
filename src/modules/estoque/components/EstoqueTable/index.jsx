@@ -32,16 +32,10 @@ export default function EstoqueTable({ data }) {
                 <Cell dataKey="unidade" />
             </Column>
 
-            {/* estoque medio */}
+            {/* cenario */}
             <Column width={100} align="center">
-                <HeaderCell className='font-bold'>Estoque Médio</HeaderCell>
+                <HeaderCell className='font-bold'>Cenário</HeaderCell>
                 <Cell dataKey="estoque_medio" />
-            </Column>
-
-            {/* estoque minimo */}
-            <Column width={120} align="center">
-                <HeaderCell className='font-bold'>Estoque Mínimo</HeaderCell>
-                <Cell dataKey="estoque_minimo" />
             </Column>
 
             <Column width={100} align="center">
