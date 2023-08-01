@@ -1,9 +1,10 @@
 # Almox-Control
 ## Prioridades
-- [ ] Modulo de controle des entrega de epis, epcs, uniformes e ferramentais e controle de vencimentos
+- [ ] Modulo de controle des entrega de epis, epcs, uniformes e ferramentais
 - [ ] Modulo de controle de estoque e movimentacoes (transacoes de estoque)
 
 ## Secundario
+- [ ] controle de vencimentos
 - [ ] Relatorios
 - [ ] Modulo de compras
 ## Entregas
