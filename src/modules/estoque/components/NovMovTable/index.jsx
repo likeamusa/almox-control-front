@@ -121,9 +121,9 @@ export default function ({ data }) {
                 <Cell dataKey='c_a_' />
             </Column>
 
-            {/* laudo */}
+            {/* n de rastreio */}
             <Column width={150} align='center'>
-                <HeaderCell className='font-bold'>Laudo</HeaderCell>
+                <HeaderCell className='font-bold'>Nº de Rastreio</HeaderCell>
                 <Cell dataKey='laudo' />
             </Column>
 
