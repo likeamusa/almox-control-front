@@ -23,7 +23,9 @@
 - O filtro de centro é visivel apenas para o usuario com privilegios de administrador
 - [ ] Coluna valor -> Valor médio do item
 ## Movimentações
-
+- [ ] Quando adicionar um item no estoque via nf, o item deve atualizar o status no acompanhamento do pedido de compras.
+### Transferencias de estoque
+- Além de fazer transferencias entre centros, deve ser possivel fazer transferencias para parceiros
 
 ## Compras
 - materiais e servicos
@@ -49,3 +51,7 @@
 #### O modulo de cadastros será responsavel por gerenciar os cadastros de fornecedores, produtos, colaborares, etc
 
 - [ ] Criar cadastro de ghe para cada funcao
+
+### Geral
+#### Banco de dados
+- Identificar centros com iniciais do nome da empresa (ex: "PRO01", "PRO02"... )
