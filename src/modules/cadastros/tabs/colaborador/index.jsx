@@ -28,7 +28,7 @@ export default function () {
                     onClick={() => setShowAddColaborador(true)}
                     className="text-blue-500 hover:text-blue-700 cursor-pointer"
                 >
-                    Adicionar Material
+                    Adicionar Colaborador
                 </a>
             </div>
 

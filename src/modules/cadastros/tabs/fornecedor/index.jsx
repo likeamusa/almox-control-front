@@ -27,7 +27,7 @@ export default function () {
                     onClick={() => setAddShowFornecedor(true)}
                     className="text-blue-500 hover:text-blue-700 cursor-pointer"
                 >
-                    Adicionar Material
+                    Adicionar Fornecedor
                 </a>
             </div>
 
@@ -48,6 +48,17 @@ export default function () {
                                 className="border border-gray-300 rounded-md text-gray-500 h-8 w-28 p-4"
                             />
 
+                            {/* nome */}
+                            <input
+                                placeholder="Nome"
+                                className="border border-gray-300 rounded-md text-gray-500 h-8 w-48 p-4"
+                            />
+
+                            {/* cnpj */}
+                            <input
+                                placeholder="CNPJ"
+                                className="border border-gray-300 rounded-md text-gray-500 h-8 w-48 p-4"
+                            />
 
                             {/* Botao adicionar */}
                             <button
