@@ -47,7 +47,7 @@ const Menu = ({ location }) => {
                 <a>Entregas</a>
             </Item>
 
-            <Item
+            {/* <Item
             style={tabSizeStyle}
             eventKey='compras'
             onClick={() => {
@@ -55,7 +55,7 @@ const Menu = ({ location }) => {
             }} 
             >
                 <a>Compras</a>
-            </Item>
+            </Item> */}
 
             {/* cadastros */}
             <Item
