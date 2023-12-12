@@ -1,6 +1,6 @@
 import { Table } from 'rsuite';
 import { useSelector, useDispatch } from 'react-redux';
-import { updateApp } from '../../../../src/store/modules/app/actions';
+import { updateApp, excluirMovimentacao } from '../../../../src/store/modules/app/actions';
 import { useNavigate } from 'react-router-dom';
 
 
@@ -122,7 +122,7 @@ const TableComponent = ({ data }) => {
 
                 
                 {/* acoes */}
-                <Column width={100} fixed="right">
+                <Column width={150} fixed="right">
                     <HeaderCell></HeaderCell>
                     <Cell>
                         {rowData => {
@@ -139,6 +139,18 @@ const TableComponent = ({ data }) => {
                                     >
                                         Autorizar
                                     </a>
+                                    <span className="mx-2"> | </span>
+                                    {/* delete */}
+                                    <a
+                                    onClick={() => {
+                                        dispatch(excluirMovimentacao(rowData.id_mov))  
+                                        setComponent('modalExclusao', true)
+                                    }}
+                                    style={{cursor: 'pointer', color: 'red'}}
+                                    >
+                                        Excluir
+                                    </a>
+                                    
                                 </span>
                             );
                         }}

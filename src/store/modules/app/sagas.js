@@ -391,6 +391,19 @@ export function* autorizarMovimentacao({ payload }) { // função que faz a requ
     } // retorna erro
 
 }
+export function* excluirMovimentacao({ payload }) { // função que faz a requisição para a api
+    console.log(payload);
+    try {
+        const { data: res } = yield api.delete(`/movimentacoes/${payload}`); // faz a requisição para a api
+        alert('Movimentação excluída com sucesso!'); // alerta de sucesso
+        yield call(fetchApp); // chama a função fetchApp para atualizar as movimentações
+
+    } catch (error) {
+
+        alert(JSON.stringify(error)) // retorna erro
+
+    }
+}
 
 // Consulta o saldo de estoque
 export function* saldoEstoque({ payload }) { // função que faz a requisição para a api
@@ -430,5 +443,6 @@ export default all([
     takeLatest(types.API_REQUEST, apiRequest),
     takeLatest(types.LOGIN, login),
     takeLatest(types.GET_ESTOQUE, saldoEstoque),
+    takeLatest(types.EXCLUIR_MOVIMENTACAO, excluirMovimentacao),
 
 ]); // dispara a função fetchApp quando a action LIST_ALL for disparada
