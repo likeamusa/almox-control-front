@@ -64,7 +64,7 @@ const TableComponent = ({ data }) => {
             loading={components.movLoading}
             >
                 {/* id_mov */}
-                <Column width={110} align="center" fixed>
+                <Column width={110} align="center" fixed resizable>
                     <HeaderCell>Id</HeaderCell>
                     <Cell dataKey="id_mov">
                         {rowData => {
@@ -83,39 +83,39 @@ const TableComponent = ({ data }) => {
                 </Column>
                 
                 {/* tipo */}
-                <Column flexGrow={1} align="center">
+                <Column flexGrow={1} align="center" resizable>
                     <HeaderCell>Tipo</HeaderCell>
                     <Cell dataKey="tipo_mov" />
                 </Column>
 
                 {/* mov */}
-                <Column width={120} align="center">
+                <Column width={120} align="center" resizable>
                     <HeaderCell>Mov.</HeaderCell>
                     <Cell dataKey="mov" />
                 </Column>
 
 
                 {/* origem */}
-                <Column flexGrow={1} align="center">
+                <Column flexGrow={1} align="center" resizable>
                     <HeaderCell>Origem</HeaderCell>
                     <Cell dataKey="id_centro_origem" />
                 </Column>
 
                 {/* destino */}
-                <Column flexGrow={1} align="center">
+                <Column flexGrow={1} align="center" resizable>
                     <HeaderCell>Destino</HeaderCell>
                     <Cell dataKey="id_centro_destino" />
                 </Column>
 
                 {/* solicitante */}
-                <Column flexGrow={1} align="center">
+                <Column flexGrow={1} align="center" resizable>
                     <HeaderCell>Solicitante</HeaderCell>
                     <Cell dataKey="solicitante" />
                 </Column>
 
 
                 {/* data */}
-                <Column width={220} align="center">
+                <Column width={220} align="center" resizable>
                     <HeaderCell>Data/Hora</HeaderCell>
                     <Cell dataKey="data" />
                 </Column>
