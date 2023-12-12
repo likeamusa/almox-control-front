@@ -123,3 +123,10 @@ export const getEstoque = (data) => {
         payload: data
     };
 };
+
+export const excluirMovimentacao = (data) => {
+    return {
+        type: types.EXCLUIR_MOVIMENTACAO,
+        payload: data
+    };
+};

@@ -17,7 +17,7 @@ const types = {
     SAVE_TIPO_MOVIMENTACAO: '@app/SAVE_TIPO_MOVIMENTACAO',
     LOGIN: '@app/LOGIN',
     GET_ESTOQUE: '@app/GET_ESTOQUE',
-    
+    EXCLUIR_MOVIMENTACAO: '@app/EXCLUIR_MOVIMENTACAO',
     
 };
 
