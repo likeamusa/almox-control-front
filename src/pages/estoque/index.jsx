@@ -1,7 +1,6 @@
 import Container from "../../components/container";
 import Barra from "./components/bar";
 import Table from "./components/EstoqueTable";
-import Autocomplete from "../../components/autocomplete";
 import { useSelector, useDispatch } from "react-redux";
 import { getEstoque, updateApp } from "../../store/modules/app/actions";
 import { useState } from "react";
@@ -12,27 +11,11 @@ const Saldo = () => {
 
     const { app } = useSelector(state => state)
 
-    // soma todos os saldos de estoque de cada material
-    const saldoEstoqueSomado = app?.saldoEstoque?.reduce((acc, item) => {
-        // filtrar por centro
-        if (!acc[item.id_material]) {
-            acc[item.id_material] = {
-                nome_centro: item.nome_centro,
-                id_material: item.id_material,
-                saldo: 0,
-                descricao: item.descricao,
-                centro_id: item.centro_id,
-            }
-        }
-        acc[item.id_material].saldo += parseInt(item.saldo)
-        return acc
-    }, {})
+    const [search, setSearch] = useState('')
 
+    const saldoByCentro = app?.saldoEstoque.filter(item => app?.estoque?.components?.centroSelecionado === item.centro_id)
 
-    // transforma o objeto em array
-    const saldoConcatendado = Object.values(saldoEstoqueSomado)
-
-    const saldoByCentro = saldoConcatendado.filter(item => app?.estoque?.components?.centroSelecionado === item.centro_id)
+    const saldoBySearch = saldoByCentro.filter(item => item.descricao.toLowerCase().includes(search.toLowerCase()))
 
     return <>
         <Container>
@@ -61,6 +44,18 @@ const Saldo = () => {
                         return <option value={item.id_centro}>{item.id_centro} - {item.descricao}</option>
                     })}
                 </select>
+
+                {/* pesquisar material */}
+                <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Pesquisar material"
+                    style={{
+                        width: '300px',
+                    }}
+                    onChange={e => setSearch(e.target.value)}
+                    value={search}
+                />
                 <a
                     style={{
                         cursor: 'pointer',
@@ -71,7 +66,7 @@ const Saldo = () => {
                     Atualizar
                 </a>
             </Barra>
-            <Table data={saldoByCentro} />
+            <Table data={saldoBySearch} />
         </Container>
 
     </>
