@@ -22,7 +22,7 @@ const TableComponent = ({ data }) => {
     return (
         <Table
         data={data}
-        autoHeight
+        height={160}
         >
             {/* id_material */}
             <Column flexGrow={1} align="center" fixed>
