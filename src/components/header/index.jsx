@@ -37,7 +37,8 @@ const Header = () => {
                 color: 'white',
                 gap: '10px',
             }}
-            >   
+            >  
+                <span>{localStorage.getItem('@almox-control/tipo_usuario') === 'admin' ? 'ADMIN' : localStorage.getItem('@almox-control/centro')}</span>
                 <span>{localStorage.getItem('@almox-control/matricula')}</span>
                 <a
                 style={{

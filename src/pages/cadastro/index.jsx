@@ -31,7 +31,7 @@ const Cadastro = () => {
     const { cadastro } = useSelector(state => state.app)
 
     useEffect(() => {
-        dispatch(updateApp({components: {...mainComponents, headerVisible: true, printing: false}}))
+        dispatch(updateApp({ components: { ...mainComponents, headerVisible: true, printing: false } }))
     }, [])
 
 
@@ -39,110 +39,118 @@ const Cadastro = () => {
 
     const handleActiveTab = (tab) => {
         dispatch(updateApp({
-            cadastro: {...cadastro, components: {...components, activeTab: tab}}
+            cadastro: { ...cadastro, components: { ...components, activeTab: tab } }
         }))
     }
+
+    const tipo_usuario = localStorage.getItem('@almox-control/tipo_usuario')
 
 
     return (
         <Container>
-        
+
             <Nav
-            activeKey={components.activeTab}
-            style={{ width: '100%', display: 'flex', justifyContent: 'space-evenly', marginTop: '10px'}}
-            appearance='tabs'
+                activeKey={components.activeTab}
+                style={{ width: '100%', display: 'flex', justifyContent: 'space-evenly', marginTop: '10px' }}
+                appearance='tabs'
             >
                 {/* material */}
                 <Item
-                style={tabSizeStyle}
-                eventKey='material'
-                onClick={() => handleActiveTab('material')}
+                    style={tabSizeStyle}
+                    eventKey='material'
+                    onClick={() => handleActiveTab('material')}
                 >
                     Material
                 </Item>
 
                 {/* colaborador */}
                 <Item
-                style={tabSizeStyle}
-                eventKey='colaborador'
-                onClick={() => handleActiveTab('colaborador')}
+                    style={tabSizeStyle}
+                    eventKey='colaborador'
+                    onClick={() => handleActiveTab('colaborador')}
                 >
                     Colaborador
                 </Item>
 
                 {/* fornecedor */}
-                <Item
+                {/* <Item
                 style={tabSizeStyle}
                 eventKey='fornecedor'
                 onClick={() => handleActiveTab('fornecedor')}
                 >
                     Fornecedor
-                </Item>
+                </Item> */}
 
                 {/* centro */}
-                <Item
-                style={tabSizeStyle}
-                eventKey='centro'
-                onClick={() => handleActiveTab('centro')}
-                >
-                    Centro
-                </Item>
+                {
+                    tipo_usuario === 'admin' &&
+
+                    <Item
+                        style={tabSizeStyle}
+                        eventKey='centro'
+                        onClick={() => handleActiveTab('centro')}
+                    >
+                        Centro
+                    </Item>
+                }
 
                 {/* nf */}
-                <Item
+                {/* <Item
                 style={tabSizeStyle}
                 eventKey='nf'
                 onClick={() => handleActiveTab('nf')}
                 >
                     Nota Fiscal
-                </Item>
+                </Item> */}
 
                 {/* C.A. */}
                 <Item
-                style={tabSizeStyle}
-                eventKey='ca'
-                onClick={() => handleActiveTab('ca')}
+                    style={tabSizeStyle}
+                    eventKey='ca'
+                    onClick={() => handleActiveTab('ca')}
                 >
                     C.A.
                 </Item>
 
                 {/* Lote */}
-                <Item
+                {/* <Item
                 style={tabSizeStyle}
                 eventKey='lote'
                 onClick={() => handleActiveTab('lote')}
                 >
                     Lote
-                </Item>
+                </Item> */}
 
                 {/* Laudo */}
-                <Item
+                {/* <Item
                 style={tabSizeStyle}
                 eventKey='laudo'
                 onClick={() => handleActiveTab('laudo')}
                 >
                     Laudo
-                </Item>
-
-                <Item
-                style={tabSizeStyle}
-                eventKey='tipo_mov'
-                onClick={() => handleActiveTab('tipo_mov')}
-                >
-                    Tipo Movimentação
-                </Item>
+                </Item> */}
+                {
+                    tipo_usuario === 'admin' &&
+                    <Item
+                        style={tabSizeStyle}
+                        eventKey='tipo_mov'
+                        onClick={() => handleActiveTab('tipo_mov')}
+                    >
+                        Tipo Movimentação
+                    </Item>
+                }
 
 
             </Nav>
-                {components.activeTab === 'material' && <Material />}
-                {components.activeTab === 'colaborador' && <Colaborador />}
-                {components.activeTab === 'fornecedor' && <Fornecedor />}
-                {components.activeTab === 'centro' && <Centro />}
-                {components.activeTab === 'nf' && <NotaFiscal />}
-                {components.activeTab === 'ca' && <CA />}
-                {components.activeTab === 'lote' && <Lote />}
-                {components.activeTab === 'laudo' && <Laudo />}
-                {components.activeTab === 'tipo_mov' && <TipoMovimentacao />}
+            {components.activeTab === 'material' && <Material />}
+            {components.activeTab === 'colaborador' && <Colaborador />}
+            {components.activeTab === 'fornecedor' && <Fornecedor />}
+            {components.activeTab === 'centro' && <Centro />}
+            {components.activeTab === 'nf' && <NotaFiscal />}
+            {components.activeTab === 'ca' && <CA />}
+            {components.activeTab === 'lote' && <Lote />}
+            {components.activeTab === 'laudo' && <Laudo />}
+            {components.activeTab === 'tipo_mov' && <TipoMovimentacao />}
 
         </Container>
     )
