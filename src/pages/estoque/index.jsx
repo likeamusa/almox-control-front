@@ -11,39 +11,47 @@ const Saldo = () => {
 
     const { app } = useSelector(state => state)
 
+    const tipo_usuario = localStorage.getItem('@almox-control/tipo_usuario')
+
+    const centroUsuario = localStorage.getItem('@almox-control/centro')
+
     const [search, setSearch] = useState('')
 
-    const saldoByCentro = app?.saldoEstoque.filter(item => app?.estoque?.components?.centroSelecionado === item.centro_id)
+    const saldoByCentro = app?.saldoEstoque.filter(item => tipo_usuario === 'admin' ? item.centro_id === app?.estoque?.components?.centroSelecionado : item.centro_id === centroUsuario)
 
     const saldoBySearch = saldoByCentro.filter(item => item.descricao.toLowerCase().includes(search.toLowerCase()))
 
     return <>
         <Container>
             <Barra>
-                <select
-                    onChange={(e => {
-                        dispatch(updateApp({
-                            estoque: {
-                                components: {
-                                    centroSelecionado: e.target.value
+                {
+                    tipo_usuario === 'admin' &&
+
+                    <select
+                        onChange={(e => {
+                            dispatch(updateApp({
+                                estoque: {
+                                    components: {
+                                        centroSelecionado: e.target.value
+                                    }
                                 }
-                            }
-                        }))
-                    })}
-                    className="form-control"
-                    style={{
-                        width: '300px',
-                    }}
-                    name="centro"
-                    value={app?.estoque?.components?.centroSelecionado}
-                    
-                >
-                    <option
-                        value="centro">Centro</option>
-                    {app?.cadastro?.cadastros?.centro?.map((item) => {
-                        return <option value={item.id_centro}>{item.id_centro} - {item.descricao}</option>
-                    })}
-                </select>
+                            }))
+                        })}
+                        className="form-control"
+                        style={{
+                            width: '300px',
+                        }}
+                        name="centro"
+                        value={app?.estoque?.components?.centroSelecionado}
+
+                    >
+                        <option
+                            value="centro">Centro</option>
+                        {app?.cadastro?.cadastros?.centro?.map((item) => {
+                            return <option value={item.id_centro}>{item.id_centro} - {item.descricao}</option>
+                        })}
+                    </select>
+                }
 
                 {/* pesquisar material */}
                 <input

@@ -18,6 +18,10 @@ const Saida = () => {
         }
     }, [])
 
+    const tipo_usuario = localStorage.getItem('@almox-control/tipo_usuario')
+
+    const centroUsuario = localStorage.getItem('@almox-control/centro')
+
     const navigate = useNavigate()
 
 
@@ -159,14 +163,18 @@ const Saida = () => {
                     <b>Origem</b>
                     <select
                     name="id_centro_origem"
+                    value={tipo_usuario === 'admin' ? "" : centroUsuario}
                     className="form-control"
                     onChange={handleInputChange}
                     >
                         <option value="">Selecione</option>
                         {
+                            tipo_usuario === 'admin' ?
                             cadastros.centro?.map(c => {
                                 return <option value={c.id_centro}>{c.id_centro} - {c.descricao}</option>
                             })
+                            :
+                            <option value={centroUsuario}>{centroUsuario} - {cadastros.centro?.find(c => c.id_centro === centroUsuario)?.descricao}</option>
                         }
                     </select>
                 </div>

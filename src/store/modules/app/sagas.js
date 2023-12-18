@@ -14,13 +14,19 @@ export function* fetchApp() { // função que faz a requisição para a api
 
         const {data: res} = yield api.get('/movimentacoes'); // faz a requisição para a api
 
+        const centro = localStorage.getItem('@almox-control/centro');
+
+        const tipo_usuario = localStorage.getItem('@almox-control/tipo_usuario');
+
+        const movByCentro = res.data.filter(mov => mov.id_centro_origem === centro);
+
         if(res.error) {
             alert(res.message);
             yield put(updateApp({components: {...components, movLoading: false }})); // loading false
             return;
         }
 
-        yield put(updateApp({ movimentacoes: res.data})); // dispara a action UPDATE_APP com o resultado da requisição
+        yield put(updateApp({ movimentacoes: tipo_usuario === 'admin' ? res.data : movByCentro})); // dispara a action UPDATE_APP com o resultado da requisição
 
         yield put(updateApp({components: {...components, movLoading: false }})); // loading false
 
@@ -334,7 +340,7 @@ export function* login({ payload }) { // função que faz a requisição para a 
         
         const { token } = res; // pega o token da resposta
         
-        const { email, matricula, tipo_usuario } = res; // pega o email da resposta
+        const { email, matricula, tipo_usuario, centro } = res; // pega o email da resposta
         
         yield put(updateApp({components: {...components, loginLoading: false}})) // atualiza o estado
         
@@ -351,6 +357,8 @@ export function* login({ payload }) { // função que faz a requisição para a 
             localStorage.setItem('@almox-control/token', token);
             localStorage.setItem('@almox-control/email', email);
             localStorage.setItem('@almox-control/matricula', matricula);
+            localStorage.setItem('@almox-control/tipo_usuario', tipo_usuario);
+            localStorage.setItem('@almox-control/centro', centro);
             
             // redireciona para a página inicial
             window.location.href = '/';
@@ -412,7 +420,7 @@ export function* saldoEstoque({ payload }) { // função que faz a requisição 
 
         const { data: res } = yield api.get(`/estoque`); // faz a requisição para a api
 
-        yield put(updateApp({ saldoEstoque: res?.data })); // atualiza o estado
+        yield put(updateApp({ saldoEstoque: res.data })); // dispara a action UPDATE_APP com o resultado da requisição
 
     } // tenta executar
 
