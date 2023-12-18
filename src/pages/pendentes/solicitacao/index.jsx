@@ -45,6 +45,7 @@ const Saida = () => {
             id_mov: id_mov,
             id_resp_sol: movData.id_resp_sol,
             tipo: movData.tipo,
+            n_nota: movData.n_nota,
             id_centro_origem: movData.id_centro_origem,
             id_centro_destino: movData.id_centro_destino,
             data: new Date(),
@@ -52,6 +53,7 @@ const Saida = () => {
             Status: 'SOLICITADO'
         }
     })
+    console.log(materials)
 
     const dataSolicitante = cadastros.colaborador?.map(s => {
         return {
@@ -156,6 +158,23 @@ const Saida = () => {
 
                 </div>
 
+                {/* n_nota */}
+                {
+                    movData.tipo === "N" &&
+                    <div
+                    className="form-group"
+                    >
+                        <b>Nº Nota</b>
+                        <input
+                        autoComplete="off"
+                        type="text"
+                        name="n_nota"
+                        className="form-control"
+                        onChange={handleInputChange}
+                        />
+                    </div>
+                }
+
                 {/* origen */}
                 <div
                 className="form-group"
@@ -163,7 +182,6 @@ const Saida = () => {
                     <b>Origem</b>
                     <select
                     name="id_centro_origem"
-                    value={tipo_usuario === 'admin' ? "" : centroUsuario}
                     className="form-control"
                     onChange={handleInputChange}
                     >
