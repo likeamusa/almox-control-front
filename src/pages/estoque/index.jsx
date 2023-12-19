@@ -4,6 +4,7 @@ import Table from "./components/EstoqueTable";
 import { useSelector, useDispatch } from "react-redux";
 import { getEstoque, updateApp } from "../../store/modules/app/actions";
 import { useState } from "react";
+import jsonToExcel from "../../utils/jsonToExcel";
 
 const Saldo = () => {
 
@@ -73,6 +74,18 @@ const Saldo = () => {
                     }}>
                     Atualizar
                 </a>
+
+                {/* Exportar */}
+                <a
+                    style={{
+                        cursor: 'pointer',
+                    }}
+                    onClick={() => {
+                        jsonToExcel(saldoByCentro, 'saldo')
+                    }}>
+                    Exportar
+                </a>
+
             </Barra>
             <Table data={saldoBySearch} />
         </Container>
