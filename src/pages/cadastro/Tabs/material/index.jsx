@@ -34,6 +34,15 @@ const Material = () => {
         dispatch(saveMaterial(cadastroModalData))
     }
 
+    const materialToCount = cadastro.cadastros.material.map((material) => {
+        return {
+            código: material.id,
+            descriação: material.descricao,
+            unidade: material.umd,
+            quantidade: ""
+        }
+    })
+
     return (
         <>
 
@@ -59,7 +68,7 @@ const Material = () => {
                 {/*Exportar*/}
                 <a
                     style={{ cursor: "pointer" }}
-                    onClick={() => jsonToExcel(cadastro.cadastros.materials, "material")}
+                    onClick={() => jsonToExcel(materialToCount, "material")}
                 >Exportar
                 </a>
 
