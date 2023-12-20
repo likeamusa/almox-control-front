@@ -23,7 +23,7 @@ const Header = () => {
                 cursor: 'pointer'
             }}
             >
-                Almox-Control
+                Almoxarifado Progen
             </h4>
             </a>
 
