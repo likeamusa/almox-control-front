@@ -1,4 +1,5 @@
 import Menu from './menu';
+import logo from '../../assets/logo.png';
 
 const Header = () => {
     
@@ -23,7 +24,7 @@ const Header = () => {
                 cursor: 'pointer'
             }}
             >
-                Almox-Control
+                <img src={logo} alt="logo" style={{width: '120px'}} />
             </h4>
             </a>
 
