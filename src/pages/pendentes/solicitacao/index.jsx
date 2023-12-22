@@ -13,7 +13,7 @@ const Saida = () => {
     const { components, materials, cadastro, online } = useSelector(state => state.app)
 
     useEffect(() => {
-        if(online) {
+        if (online) {
             dispatch(fetchCadastro())
         }
     }, [])
@@ -31,11 +31,12 @@ const Saida = () => {
 
     const setComponent = (component, value) => {
         dispatch(updateApp({
-            components: {...components, [component]: value}}
+            components: { ...components, [component]: value }
+        }
         ))
     }
 
-    const [ movData, setMovData ] = useState({})
+    const [movData, setMovData] = useState({})
 
     const id_mov = Math.floor(Math.random() * 99999999)
 
@@ -64,23 +65,28 @@ const Saida = () => {
 
     const handleInputChange = (e) => {
         const { name, value } = e.target
-        setMovData({...movData, [name]: value})
+        setMovData({ ...movData, [name]: value })
         console.log(movData)
     }
 
     const handleSave = () => {
-        mateiralsToSave.forEach(material => {
+        dispatch(saveMovimentacao(mateiralsToSave.map(material => {
             const id_resp_sol = document.querySelector('[name="id_resp_sol"]').value?.replace(/[^0-9]/g, '')
-            dispatch(saveMovimentacao({...material, id_resp_sol}))
-            navigate('/pendentes')
-            dispatch(updateApp({
-                'materials': []
-            }))
-        })
+            return {
+                ...material,
+                id_resp_sol: id_resp_sol
+            }
+
+        })))
+
+        navigate('/pendentes')
+        dispatch(updateApp({
+            'materials': []
+        }))
     }
 
     const materialsWithDescription = materials?.map(material => {
-        
+
         const materialDescription = cadastros.material?.find(m => m.id === parseInt(material.id_material))?.descricao
         const materialUnidade = cadastros.material?.find(m => m.id === parseInt(material.id_material))?.umd
         return {
@@ -94,144 +100,144 @@ const Saida = () => {
         <>
             <Container>
 
-            <ModalComponent />
-            <Barra>
+                <ModalComponent />
+                <Barra>
 
-                {/* VOLTAR */}
-                <a
-                style={{cursor: 'pointer'}}
-                onClick={() => navigate('/pendentes')}
-                >Voltar</a>
+                    {/* VOLTAR */}
+                    <a
+                        style={{ cursor: 'pointer' }}
+                        onClick={() => navigate('/pendentes')}
+                    >Voltar</a>
 
-                <div></div>
+                    <div></div>
 
-                {/* SALVAR */}
-                <a
-                style={{cursor: 'pointer'}}
-                onClick={() => handleSave()}
-                >
-                    {mateiralsToSave.length > 0 ? 'Salvar' : ''}
-                </a>
-
-            </Barra>
-
-            <div
-            style={{
-                width: '50%',
-                margin: 'auto',
-                borderBottom: '1px solid black',
-            }}
-            >
-                {/* solicitante */}
-                <div
-                className="form-group"
-                >
-                    <b>Solicitante</b>
-                    <Autocomplete 
-                    autoFocus
-                    data={dataSolicitante}
-                    name="id_resp_sol"
-                    onChange={handleInputChange}
-                    value={movData.id_resp_sol}
-                    />
-                </div>
-
-                {/* tipo */}
-                <div
-                className="form-group"
-                >
-                    <b>Tipo</b>
-                    <select
-                    name="tipo"
-                    className="form-control"
-                    value={movData.tipo_mov}
-                    onChange={handleInputChange}
+                    {/* SALVAR */}
+                    <a
+                        style={{ cursor: 'pointer' }}
+                        onClick={() => handleSave()}
                     >
-                        <option value="">Selecione</option>
-                        {
-                            cadastros.tipo_mov?.map(t => {
-                                return <option value={t.tipo}>{t.tipo} - {t.descricao}</option>
-                            })
-                        }
+                        {mateiralsToSave.length > 0 ? 'Salvar' : ''}
+                    </a>
 
-                    </select>
+                </Barra>
 
-                </div>
-
-                {/* n_nota */}
-                {
-                    movData.tipo === "N" &&
+                <div
+                    style={{
+                        width: '50%',
+                        margin: 'auto',
+                        borderBottom: '1px solid black',
+                    }}
+                >
+                    {/* solicitante */}
                     <div
-                    className="form-group"
+                        className="form-group"
                     >
-                        <b>Nº Nota</b>
-                        <input
-                        autoComplete="off"
-                        type="text"
-                        name="n_nota"
-                        className="form-control"
-                        onChange={handleInputChange}
+                        <b>Solicitante</b>
+                        <Autocomplete
+                            autoFocus
+                            data={dataSolicitante}
+                            name="id_resp_sol"
+                            onChange={handleInputChange}
+                            value={movData.id_resp_sol}
                         />
                     </div>
-                }
 
-                {/* origen */}
-                <div
-                className="form-group"
-                >
-                    <b>Origem</b>
-                    <select
-                    name="id_centro_origem"
-                    className="form-control"
-                    onChange={handleInputChange}
+                    {/* tipo */}
+                    <div
+                        className="form-group"
                     >
-                        <option value="">Selecione</option>
-                        {
-                            tipo_usuario === 'admin' ?
-                            cadastros.centro?.map(c => {
-                                return <option value={c.id_centro}>{c.id_centro} - {c.descricao}</option>
-                            })
-                            :
-                            <option value={centroUsuario}>{centroUsuario} - {cadastros.centro?.find(c => c.id_centro === centroUsuario)?.descricao}</option>
-                        }
-                    </select>
+                        <b>Tipo</b>
+                        <select
+                            name="tipo"
+                            className="form-control"
+                            value={movData.tipo_mov}
+                            onChange={handleInputChange}
+                        >
+                            <option value="">Selecione</option>
+                            {
+                                cadastros.tipo_mov?.map(t => {
+                                    return <option value={t.tipo}>{t.tipo} - {t.descricao}</option>
+                                })
+                            }
+
+                        </select>
+
+                    </div>
+
+                    {/* n_nota */}
+                    {
+                        movData.tipo === "N" &&
+                        <div
+                            className="form-group"
+                        >
+                            <b>Nº Nota</b>
+                            <input
+                                autoComplete="off"
+                                type="text"
+                                name="n_nota"
+                                className="form-control"
+                                onChange={handleInputChange}
+                            />
+                        </div>
+                    }
+
+                    {/* origen */}
+                    <div
+                        className="form-group"
+                    >
+                        <b>Origem</b>
+                        <select
+                            name="id_centro_origem"
+                            className="form-control"
+                            onChange={handleInputChange}
+                        >
+                            <option value="">Selecione</option>
+                            {
+                                tipo_usuario === 'admin' ?
+                                    cadastros.centro?.map(c => {
+                                        return <option value={c.id_centro}>{c.id_centro} - {c.descricao}</option>
+                                    })
+                                    :
+                                    <option value={centroUsuario}>{centroUsuario} - {cadastros.centro?.find(c => c.id_centro === centroUsuario)?.descricao}</option>
+                            }
+                        </select>
+                    </div>
+
+                    {/* destino */}
+                    <div
+                        className="form-group"
+                    >
+                        <b>Destino</b>
+                        <select
+                            name="id_centro_destino"
+                            className="form-control"
+                            onChange={handleInputChange}
+                        >
+                            <option value="">Selecione</option>
+                            {
+                                cadastros.centro?.map(c => {
+                                    return <option value={c.id_centro}>{c.id_centro} - {c.descricao}</option>
+                                })
+                            }
+                        </select>
+                    </div>
+
+
+
                 </div>
 
-                {/* destino */}
-                <div
-                className="form-group"
-                >
-                    <b>Destino</b>
-                    <select
-                    name="id_centro_destino"
-                    className="form-control"
-                    onChange={handleInputChange}
-                    >
-                       <option value="">Selecione</option>
-                        {
-                            cadastros.centro?.map(c => {
-                                return <option value={c.id_centro}>{c.id_centro} - {c.descricao}</option>
-                            })
-                        }
-                    </select>
-                </div>
-
-
-
-            </div>
-
-            {/* ADICIONAR */}
-            <a
-                style={{
-                    cursor: 'pointer',
-                    alignSelf: 'center',
-                    marginTop: '20px',
-                    marginBottom: '20px',
-                }}
-                onClick={() => setComponent('saidaModal', true)}
+                {/* ADICIONAR */}
+                <a
+                    style={{
+                        cursor: 'pointer',
+                        alignSelf: 'center',
+                        marginTop: '20px',
+                        marginBottom: '20px',
+                    }}
+                    onClick={() => setComponent('saidaModal', true)}
                 >Adicionar item</a>
 
-            <TableComponent data={materialsWithDescription}/>
+                <TableComponent data={materialsWithDescription} />
 
             </Container>
 

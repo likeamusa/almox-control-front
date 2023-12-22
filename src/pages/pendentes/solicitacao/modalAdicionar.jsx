@@ -101,7 +101,8 @@ const ModalComponent = () => {
                         >
                             <b>Quantidade</b>
                             <input
-                            type="text"
+                            type="number"
+                            min={1}
                             name="qtde"
                             autoComplete='off'
                             className="form-control"
