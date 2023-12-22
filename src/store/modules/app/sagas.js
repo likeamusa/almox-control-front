@@ -73,6 +73,7 @@ export function* apiRequest( {payload }) {
 export function* saveMovimentacao({ payload }) { // função que faz a requisição para a api
 
     try {
+        console.log(payload);
 
         const { data: res } = yield api.post('/movimentacoes', payload); // faz a requisição para a api
 
@@ -81,7 +82,7 @@ export function* saveMovimentacao({ payload }) { // função que faz a requisiç
             return;
         } // se houver erro, retorna o erro
 
-        alert(`Movimentação ${res.data.id_mov} salva com sucesso!`); // alerta de sucesso
+        alert(`Movimentação ${res.data[0].id_mov} salva com sucesso!`); // alerta de sucesso
         
         yield call(fetchApp); // chama a função fetchApp para atualizar as movimentações
         
