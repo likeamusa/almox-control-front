@@ -18,7 +18,7 @@ const types = {
     LOGIN: '@app/LOGIN',
     GET_ESTOQUE: '@app/GET_ESTOQUE',
     EXCLUIR_MOVIMENTACAO: '@app/EXCLUIR_MOVIMENTACAO',
-    
+    SAVE_CA_MATERIAL: '@app/SAVECAMATERIAL',
 };
 
 export default types;

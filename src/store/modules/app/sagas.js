@@ -433,6 +433,23 @@ export function* saldoEstoque({ payload }) { // função que faz a requisição 
 
 }
 
+export function* saveCaMaterial({ payload }) { // função que faz a requisição para a api
+
+    try{
+
+        const { data: res} = yield api.post('/ca_materials', payload); // faz a requisição para a api
+
+        yield call(fetchCadastro); // chama a função fetchCadastro para atualizar os cadastros
+
+        alert('Certificado salvo com sucesso!'); // alerta de sucesso
+    }
+    catch (error) {
+                
+                alert(JSON.stringify(error)) // retorna erro
+        
+    }
+}
+
 export default all([
     
     takeLatest(types.LIST_ALL, fetchApp),
@@ -453,5 +470,6 @@ export default all([
     takeLatest(types.LOGIN, login),
     takeLatest(types.GET_ESTOQUE, saldoEstoque),
     takeLatest(types.EXCLUIR_MOVIMENTACAO, excluirMovimentacao),
+    takeLatest(types.SAVE_CA_MATERIAL, saveCaMaterial)
 
 ]); // dispara a função fetchApp quando a action LIST_ALL for disparada

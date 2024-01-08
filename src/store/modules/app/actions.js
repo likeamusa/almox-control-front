@@ -130,3 +130,10 @@ export const excluirMovimentacao = (data) => {
         payload: data
     };
 };
+
+export const saveCaMaterial = (data) => {
+    return {
+        type: types.SAVE_CA_MATERIAL,
+        payload: data
+    };
+}

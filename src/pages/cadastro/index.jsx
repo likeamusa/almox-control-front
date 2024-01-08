@@ -13,6 +13,7 @@ import CA from "./Tabs/ca";
 import Lote from "./Tabs/lote";
 import Laudo from "./Tabs/laudo";
 import TipoMovimentacao from "./Tabs/movs";
+import Ca_material from "./Tabs/ca-material";
 
 const tabSizeStyle = {
     width: 160,
@@ -35,7 +36,7 @@ const Cadastro = () => {
     }, [])
 
 
-    const { components } = cadastro
+    const { components, cadastros } = cadastro
 
     const handleActiveTab = (tab) => {
         dispatch(updateApp({
@@ -140,17 +141,23 @@ const Cadastro = () => {
                     </Item>
                 }
 
+                {/* Ca_material */}
+                <Item
+                    style={tabSizeStyle}
+                    eventKey='ca_material'
+                    onClick={() => handleActiveTab('ca_material')}
+                >
+                    C.A. Material
+                </Item>
 
             </Nav>
-            {components.activeTab === 'material' && <Material />}
+            {components.activeTab === 'material' && 
+             <Material />}
             {components.activeTab === 'colaborador' && <Colaborador />}
-            {components.activeTab === 'fornecedor' && <Fornecedor />}
             {components.activeTab === 'centro' && <Centro />}
-            {components.activeTab === 'nf' && <NotaFiscal />}
             {components.activeTab === 'ca' && <CA />}
-            {components.activeTab === 'lote' && <Lote />}
-            {components.activeTab === 'laudo' && <Laudo />}
             {components.activeTab === 'tipo_mov' && <TipoMovimentacao />}
+            {components.activeTab === 'ca_material' && <Ca_material />}
 
         </Container>
     )

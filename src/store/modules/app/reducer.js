@@ -32,9 +32,12 @@ const INITIAL_STATE = {
             cadastroModalData: {},
         },
         cadastros: {
-            material: [
-                {}
-            ],
+            material: [{}],
+            colaborador: [{}],
+            centro: [{}],
+            ca: [{}],
+            ca_material: [{}],
+
         },
     },
     movimentacoes: [],

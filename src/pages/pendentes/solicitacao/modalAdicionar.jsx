@@ -3,10 +3,23 @@ import { useSelector, useDispatch } from 'react-redux';
 import { updateApp, autorizarMovimentacao, apiRequest } from '../../../store/modules/app/actions';
 import { useEffect, useState } from 'react';
 import Autocomplete from '../../../components/autocomplete';
+import api from '../../../services/api';
 
 const { Header, Title, Body, Footer } = Modal;
 
 const ModalComponent = () => {
+
+    const [caResData, setCaResData] = useState([])
+
+    useEffect(() => {
+        api.get('/ca_materials')
+        .then((response) => {
+            setCaResData(response.data)
+        })
+        .catch((error) => {
+            console.log(error)
+        })
+    }, [])
 
     const { app } = useSelector(state => state)
 
@@ -14,7 +27,7 @@ const ModalComponent = () => {
     
     const dispatch = useDispatch()
 
-    const [caData, setCaData] = useState([])
+    const [caData, setCaData] = useState([]) || []
 
     const setComponent = (component, value) => {
         dispatch(updateApp({
@@ -31,17 +44,20 @@ const ModalComponent = () => {
         
         const id_material = document.querySelector('input[name="id_material"]').value?.split(' - ')[0]
 
-        setCaData(cadastro?.cadastros?.ca?.filter((item) => item.material_id === parseInt(id_material)))
+        const filteredCas = caResData?.filter((item) => item.materialId === Number(id_material))
+
+        setCaData(filteredCas)
     }
 
     const handleConfirmar = () => {
         const id_material = document.querySelector('input[name="id_material"]').value?.split(' - ')[0]
         console.log(id_material)
         dispatch(updateApp({
-            materials: [...materials, {...material, id_material}]
+            materials: [...materials, {...material, id_material, n_ca: document.querySelector('select[name="n_ca"]').value}]
         }))
         
         setComponent('saidaModal', false)
+        setCaData([])
     }
 
     const materialData = cadastro?.cadastros?.material?.map((item) => {
@@ -123,10 +139,10 @@ const ModalComponent = () => {
                                 <option value="">Selecione</option>
                                 {caData?.map((item) => (
                                     <option
-                                    key={item?.c_a_}
-                                    value={item.c_a_}
+                                    key={item?.caId}
+                                    value={item.c_a}
                                     >
-                                        {`${item.c_a_} - ${new Date(item.vencimento).toLocaleDateString()}`}
+                                        {`${item.c_a} - ${new Date(item.c_a_.vencimento).toLocaleDateString()}`}
                                     </option>
                                 ))}
                             </select>

@@ -20,8 +20,7 @@ const ModalComponent = ( {cadastroName, onClickProp, onInputChange} ) => {
         ))
     }
 
-    const filteredCadastro = Object.keys(cadastros[cadastroName][0]).filter(key => key !== "createdAt" && key !== "updatedAt")
-
+    const filteredCadastro = Object.keys(cadastros[cadastroName][0]).filter(key => key !== "createdAt" && key !== "updatedAt" && key !== "caId")
     return (
         
         <Modal
