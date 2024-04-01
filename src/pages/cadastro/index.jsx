@@ -56,13 +56,15 @@ const Cadastro = () => {
                 appearance='tabs'
             >
                 {/* material */}
-                <Item
-                    style={tabSizeStyle}
-                    eventKey='material'
-                    onClick={() => handleActiveTab('material')}
-                >
-                    Material
-                </Item>
+                {tipo_usuario === 'admin' &&
+                    <Item
+                        style={tabSizeStyle}
+                        eventKey='material'
+                        onClick={() => handleActiveTab('material')}
+                    >
+                        Material
+                    </Item>
+                }
 
                 {/* colaborador */}
                 <Item
@@ -151,8 +153,8 @@ const Cadastro = () => {
                 </Item>
 
             </Nav>
-            {components.activeTab === 'material' && 
-             <Material />}
+
+            {components.activeTab === 'material' && <Material />}
             {components.activeTab === 'colaborador' && <Colaborador />}
             {components.activeTab === 'centro' && <Centro />}
             {components.activeTab === 'ca' && <CA />}
