@@ -8,7 +8,7 @@ const Header = () => {
         style={{
             alignItems: 'center',
             width: '100%',
-            backgroundColor: '#a8dadc',
+            backgroundColor: '#e3c236',
             height: '50px',
             display: 'flex',
             justifyContent: 'space-between',
